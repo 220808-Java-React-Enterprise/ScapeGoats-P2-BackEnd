@@ -43,6 +43,17 @@ public class Users {
     @JsonManagedReference
     private List<Readings> readings;
 
+    @ManyToMany
+    @JoinTable(
+            name = "consultations",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name = "consultant_id")
+
+    )
+    List<Consultants> consultants;
+
+
+
     public Users(){
 
     }
