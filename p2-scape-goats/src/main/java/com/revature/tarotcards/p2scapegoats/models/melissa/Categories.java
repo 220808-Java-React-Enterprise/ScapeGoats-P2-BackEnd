@@ -25,6 +25,14 @@ public class Categories {
     @JsonManagedReference
     private List<Categories> categories;
 
+    @OneToMany(
+            mappedBy = "categories",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    @JsonManagedReference
+    private List<Questions> questions;
+
     public Categories() {
     }
 
