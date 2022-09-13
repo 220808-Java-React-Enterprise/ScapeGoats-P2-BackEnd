@@ -11,7 +11,7 @@ public class Roles {
     private String role_id;
 
     @Column(name="title", nullable = false)
-    private String name;
+    private String title;
 
     /*
      * @JsonManagedReference is the forward part of reference – the one that gets serialized normally.
@@ -40,9 +40,9 @@ public class Roles {
        //users = new ArrayList<>();
     }
 
-    public Roles(String role_id, String name) {
+    public Roles(String role_id, String title) {
         this.role_id = role_id;
-        this.name = name;
+        this.title = title;
     }
 
     public String getRole_id() {
@@ -53,19 +53,19 @@ public class Roles {
         this.role_id = role_id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
     public String toString() {
         return "Roles{" +
                 "role_id='" + role_id + '\'' +
-                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
                 '}';
     }
 }

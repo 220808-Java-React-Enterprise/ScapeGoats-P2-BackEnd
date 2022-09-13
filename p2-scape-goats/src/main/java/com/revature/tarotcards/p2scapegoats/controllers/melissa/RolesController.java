@@ -32,8 +32,14 @@ public class RolesController {
 
 
     @PostMapping(value = "/roles", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Roles> roles(@RequestBody NewRoleRequest request){
-        return rolesService.getAll();
+    public @ResponseBody String roles(@RequestBody NewRoleRequest request){
+
+        return rolesService.addRole(request).getRole_id();
+    }
+
+    @GetMapping(value = "/getall", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Roles> getAll(){
+       return rolesService.getAll();
     }
 
 }

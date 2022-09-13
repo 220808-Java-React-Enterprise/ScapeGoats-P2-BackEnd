@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface RoleRepository extends CrudRepository<Roles, String > {
+public interface RoleRepository extends CrudRepository<Roles, String> {
 
 }
