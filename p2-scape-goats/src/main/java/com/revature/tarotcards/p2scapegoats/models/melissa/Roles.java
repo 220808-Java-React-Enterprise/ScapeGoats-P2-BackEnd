@@ -1,7 +1,11 @@
 package com.revature.tarotcards.p2scapegoats.models.melissa;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="roles")
@@ -27,17 +31,16 @@ public class Roles {
      * CascadeType.ALL = persistence will propagate (cascade) all EntityManager operations (PERSIST, REMOVE, REFRESH, MERGE, DETACH) to the relating entities.
      */
 
-    /*@OneToMany (
-        mappedby = "role_id",   //is this foreign key? in the users table?
+    @OneToMany (
+        mappedBy = "role",   //define the referencing side (non-owning side)
         fetch = FetchType.EAGER,
-        cascade = CascadeType.All
-
+        cascade = CascadeType.ALL
     )
     @JsonManagedReference  //Head
-    private List<Users> users;*/
+    private List<Users> users;
 
     public Roles() {
-       //users = new ArrayList<>();
+       users = new ArrayList<>();  //not sure if this is needed here
     }
 
     public Roles(String role_id, String title) {
