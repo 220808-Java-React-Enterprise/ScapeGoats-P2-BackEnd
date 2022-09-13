@@ -31,7 +31,7 @@ public class RolesController {
      */
 
 
-    @PostMapping(value = "/roles", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/addrole", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String roles(@RequestBody NewRoleRequest request){
 
         return rolesService.addRole(request).getRole_id();

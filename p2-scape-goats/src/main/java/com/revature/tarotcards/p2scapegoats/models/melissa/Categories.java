@@ -8,21 +8,20 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="category")
-public class Category {
+public class Categories {
 
     @Id // Primary Key
     private String category_id;
 
     @Column(name="category", nullable = false)
-    private String name;
+    private String category;
 
-    public Category() {
-
+    public Categories() {
     }
 
-    public Category(String category_id, String name) {
+    public Categories(String category_id, String category) {
         this.category_id = category_id;
-        this.name = name;
+        this.category = category;
     }
 
     public String getCategory_id() {
@@ -33,19 +32,19 @@ public class Category {
         this.category_id = category_id;
     }
 
-    public String getName() {
-        return name;
+    public String getCategory() {
+        return category;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override
     public String toString() {
-        return "Category{" +
+        return "Categories{" +
                 "category_id='" + category_id + '\'' +
-                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
                 '}';
     }
 }

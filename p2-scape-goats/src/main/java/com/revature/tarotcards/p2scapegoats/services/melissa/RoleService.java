@@ -22,8 +22,6 @@ public class RoleService {
         return (List<Roles>) roleRepo.findAll();
     }
 
-    public List<String> roles;
-
     public Roles addRole(NewRoleRequest request){
         Roles role = new Roles(request.getRole_id(), request.getTitle());
         roleRepo.save(role);
