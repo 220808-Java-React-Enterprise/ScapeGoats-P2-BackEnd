@@ -20,7 +20,7 @@ public class UsersController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "/adduser", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/signup", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String users(@RequestBody NewUserRequest request){
 
         return userService.addUser(request).getUser_id();
