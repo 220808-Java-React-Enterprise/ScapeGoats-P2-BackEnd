@@ -4,10 +4,12 @@ package com.revature.tarotcards.p2scapegoats.models.melissa;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.revature.tarotcards.p2scapegoats.repositories.melissa.RoleRepository;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 
 
 @Entity
@@ -27,11 +29,11 @@ public class Users {
     private String email;
     /*@Column(name = "role_id", nullable = false)
     private String role_id;*/                           //because I'm creating it below where I'm joining tables
-    @Column(name = "consultant", nullable = false)      //it's a foreign key (cont from above)
+    @Column(name = "consultant")      //it's a foreign key (cont from above)
     private Boolean consultant = false;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)  //my foreign key
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")  //my foreign key
     @JsonBackReference
     private Roles role;
 
@@ -56,7 +58,7 @@ public class Users {
 
     }
 
-    public Users(String user_id, String username, String firstName, String lastName, String password, String email, String role_id, Boolean consultant) {
+    public Users(String user_id, String username, String firstName, String lastName, String password, String email, Roles role, Boolean consultant) {
         this.user_id = user_id;
         this.username = username;
         this.firstName = firstName;
@@ -64,6 +66,7 @@ public class Users {
         this.password = password;
         this.email = email;
         this.consultant = consultant;
+        this.role = role;
     }
 
     public String getUser_id() {

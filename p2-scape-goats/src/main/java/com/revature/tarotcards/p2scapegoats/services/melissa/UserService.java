@@ -1,7 +1,9 @@
 package com.revature.tarotcards.p2scapegoats.services.melissa;
 
 import com.revature.tarotcards.p2scapegoats.dtos.request.melissa.NewUserRequest;
+import com.revature.tarotcards.p2scapegoats.models.melissa.Roles;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Users;
+import com.revature.tarotcards.p2scapegoats.repositories.melissa.RoleRepository;
 import com.revature.tarotcards.p2scapegoats.repositories.melissa.UserRepository;
 
 import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.InvalidRequestException;
@@ -14,26 +16,29 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository userRepo;
+    private final RoleRepository roleRepo;
 
-    public UserService(UserRepository userRepo) {
+    public UserService(UserRepository userRepo, RoleRepository roleRepo) {
         this.userRepo = userRepo;
+        this.roleRepo = roleRepo;
     }
 
     public List<Users> getAll(){
         return (List<Users>) userRepo.findAll();
     }
 
-    public String addUser(NewUserRequest request){
-        Users users = null;
-        if(!isDuplicateUsername(request.getUsername())) {
+    public Users addUser(NewUserRequest request){
+
+       /* if(!isDuplicateUsername(request.getUsername())) {
             if(isValidPassword(request.getPassword())) {
-                if(isValidUsername(request.getUsername())) {
-                    users = new Users(UUID.randomUUID().toString(), request.getUsername(), request.getFirstname(), request.getLastname(), request.getPassword(), request.getEmail(), "456", null);
+                if(isValidUsername(request.getUsername())) {*/
+
+                    Users users = new Users(UUID.randomUUID().toString(), request.getUsername(), request.getFirstname(), request.getLastname(), request.getPassword(), request.getEmail(), roleRepo.findByTitle("user"), false);
                     userRepo.save(users);
-                }
+         /*       }
             }
-        }
-        return users.getFirstName() + "has been added";
+        }*/
+        return users;
     }
     public boolean isValidPassword(String password){
         if(!password.matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")){

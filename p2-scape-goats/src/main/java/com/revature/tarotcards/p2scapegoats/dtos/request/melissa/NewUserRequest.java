@@ -2,7 +2,6 @@ package com.revature.tarotcards.p2scapegoats.dtos.request.melissa;
 
 public class NewUserRequest {
 
-    private String id;
     private String username;
     private String firstname;
     private String lastname;
@@ -14,15 +13,12 @@ public class NewUserRequest {
     public NewUserRequest() {
     }
 
-    public NewUserRequest(String id, String username, String firstname, String lastname, String password, String email, String role_id, String consultant) {
-        this.id = id;
+    public NewUserRequest(String username, String firstname, String lastname, String password, String email) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
         this.email = email;
-        this.role_id = role_id;
-        this.consultant = consultant;
     }
 
     public String getRole_id() {
@@ -31,14 +27,6 @@ public class NewUserRequest {
 
     public void setRole_id(String role_id) {
         this.role_id = role_id;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -92,7 +80,6 @@ public class NewUserRequest {
     @Override
     public String toString() {
         return "NewUserRequest{" +
-                "id='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +

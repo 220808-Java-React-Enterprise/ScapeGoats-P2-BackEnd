@@ -9,5 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface RoleRepository extends CrudRepository<Roles, String> {
-
+    @Query(value = "SELECT * FROM roles WHERE title = ?1", nativeQuery = true) //nativeQuery says run my query instead of thinking you know by my method name
+    Roles findByTitle(String title);
 }
