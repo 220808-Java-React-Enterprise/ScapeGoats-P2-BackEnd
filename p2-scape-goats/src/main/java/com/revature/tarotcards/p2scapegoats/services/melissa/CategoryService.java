@@ -25,4 +25,8 @@ public class CategoryService {
         categoryRepo.save(cat);
         return cat;
     }
+
+    public void delete(Categories category){
+        categoryRepo.delete(category);
+    }
 }

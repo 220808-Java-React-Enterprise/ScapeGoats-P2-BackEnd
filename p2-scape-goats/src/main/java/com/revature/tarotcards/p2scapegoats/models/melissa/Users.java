@@ -52,8 +52,6 @@ public class Users {
     )
     List<Consultants> consultants;
 
-
-
     public Users(){
 
     }

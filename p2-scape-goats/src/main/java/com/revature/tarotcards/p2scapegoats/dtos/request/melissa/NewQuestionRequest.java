@@ -4,13 +4,23 @@ public class NewQuestionRequest {
 
     private String id;
     private String question;
+    private String category_id;
 
     public NewQuestionRequest() {
     }
 
-    public NewQuestionRequest(String id, String question) {
+    public NewQuestionRequest(String id, String question, String category_id) {
         this.id = id;
         this.question = question;
+        this.category_id = category_id;
+    }
+
+    public String getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
     }
 
     public String getId() {
@@ -34,6 +44,7 @@ public class NewQuestionRequest {
         return "NewQuestionRequest{" +
                 "id='" + id + '\'' +
                 ", question='" + question + '\'' +
+                ", category_id='" + category_id + '\'' +
                 '}';
     }
 }

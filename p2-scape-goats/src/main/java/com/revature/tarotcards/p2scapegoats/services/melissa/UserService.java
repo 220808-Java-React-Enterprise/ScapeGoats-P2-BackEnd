@@ -57,7 +57,7 @@ public class UserService {
         return true;
     }
 
-    public void deleteUser(Users user){
+    public void delete(Users user){
         userRepo.delete(user);
     }
 }
