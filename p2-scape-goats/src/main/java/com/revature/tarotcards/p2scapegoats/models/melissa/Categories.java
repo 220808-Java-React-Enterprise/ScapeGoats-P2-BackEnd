@@ -1,13 +1,14 @@
 package com.revature.tarotcards.p2scapegoats.models.melissa;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name="category")
+@Table(name="categories")
 public class Categories {
 
     @Id // Primary Key
@@ -15,6 +16,22 @@ public class Categories {
 
     @Column(name="category", nullable = false)
     private String category;
+
+    @OneToMany(
+            mappedBy = "category",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    @JsonManagedReference
+    private List<Categories> categories;
+
+    @OneToMany(
+            mappedBy = "categories",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    @JsonManagedReference
+    private List<Questions> questions;
 
     public Categories() {
     }
