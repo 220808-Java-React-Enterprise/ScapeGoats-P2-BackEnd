@@ -31,14 +31,14 @@ public class UserService {
 
     public Users addUser(NewUserRequest request){
         Users users = null;
-       // if (isDuplicateUsername(request.getUsername())) {
+        if (isDuplicateUsername(request.getUsername())) {
             if (isValidPassword(request.getPassword())) {
                 if (isValidUsername(request.getUsername())) {
                     users = new Users(UUID.randomUUID().toString(), request.getUsername(), request.getFirstname(), request.getLastname(), request.getPassword(), request.getEmail(), roleRepo.findByTitle("user"), false);
                     userRepo.save(users);
                 }
             }
-      //  }
+        }
         return users;
     }
     public boolean isValidPassword(String password){
@@ -51,7 +51,7 @@ public class UserService {
     }
 
     public boolean isDuplicateUsername(String username){
-        if (userRepo.findById(username)==null) throw new ResourceConflictException("Sorry, " + username + " already taken");
+        if (userRepo.findUsernameByUsername(username)!=null) throw new ResourceConflictException("Sorry, " + username + " already taken");
         return false;
     }
     public boolean isValidUsername(String username){
