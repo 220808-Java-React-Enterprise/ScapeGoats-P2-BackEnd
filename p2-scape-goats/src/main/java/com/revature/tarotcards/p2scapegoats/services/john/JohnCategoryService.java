@@ -1,9 +1,6 @@
 package com.revature.tarotcards.p2scapegoats.services.john;
-
-
-
-
 import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewCategoryRequest;
+import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewQuestionRequest;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Categories;
 import com.revature.tarotcards.p2scapegoats.repositories.john.JohnCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;

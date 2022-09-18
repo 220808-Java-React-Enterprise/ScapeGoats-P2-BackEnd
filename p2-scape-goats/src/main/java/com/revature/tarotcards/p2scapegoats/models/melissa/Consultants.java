@@ -21,6 +21,8 @@ public class Consultants {
     public Consultants() {
     }
 
+
+
     public Consultants(String id, String firstname, String lastname) {
         this.id = id;
         this.firstname = firstname;
@@ -49,6 +51,14 @@ public class Consultants {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public List<Users> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<Users> users) {
+        this.users = users;
     }
 
     @Override

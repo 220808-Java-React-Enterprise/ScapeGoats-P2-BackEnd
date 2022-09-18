@@ -27,6 +27,14 @@ public class AuthController {
     private JohnUserService userService;
 
 
+    // POSTMAN url => http://localhost:8080/p2-scape-goats/auth/login
+    // BODY OF POSTMAN
+    /*
+            {
+                "username": "testing123",
+                "password": "Passw0rd@"
+            }
+     */
     @CrossOrigin // CORS
     @PostMapping(value = "/login", consumes = "application/json")
     public void login(@RequestBody JohnLoginRequest request, HttpServletResponse response) throws IOException {
