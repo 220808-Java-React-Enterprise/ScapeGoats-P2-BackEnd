@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="employees")
-public class EmployeeEntity {
+public class JohnEmployeeEntity {
 
     @Id
     private String id;
@@ -23,7 +23,7 @@ public class EmployeeEntity {
     @Column(name="address")
     private String address;
 
-    public EmployeeEntity() {
+    public JohnEmployeeEntity() {
 
     }
 }

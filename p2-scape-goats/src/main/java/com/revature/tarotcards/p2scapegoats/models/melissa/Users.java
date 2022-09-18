@@ -58,6 +58,11 @@ public class Users {
 
     }
 
+    public Users(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Users(String user_id, String username, String firstName, String lastName, String password, String email, Roles role, Boolean consultant) {
         this.user_id = user_id;
         this.username = username;
