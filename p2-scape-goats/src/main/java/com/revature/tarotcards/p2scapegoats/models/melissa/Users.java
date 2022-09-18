@@ -10,6 +10,7 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 
 @Entity
@@ -58,6 +59,12 @@ public class Users {
 
     }
 
+    public Users(String user_id, String username, String password, Roles role) {
+        this.user_id = user_id;
+        this.username = username;
+        this.role = role;
+    }
+
     public Users(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -71,6 +78,14 @@ public class Users {
         this.password = password;
         this.email = email;
         this.consultant = consultant;
+        this.role = role;
+    }
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
         this.role = role;
     }
 
