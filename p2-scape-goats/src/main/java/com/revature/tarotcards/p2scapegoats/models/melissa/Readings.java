@@ -22,18 +22,20 @@ public class Readings {
     @Column(name = "date", nullable = false)
     private Timestamp date;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id", nullable = false)
     @JsonBackReference
     private Users user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="category_id", nullable = false)
     @JsonBackReference
     private Categories category;
 
     public Readings() {
     }
+
+
 
     public Readings(String id, String card1, String card2, String card3) {
         this.id = id;

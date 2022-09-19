@@ -56,6 +56,16 @@ public class JohnReadingService {
 
     public Readings update(JohnNewReadingRequest request) {
         Categories category = categoryService.findCategoryByCategory(request.getCategory());
+        List<Users> users = (List<Users>) johnUserRepository.findAll();
+        Users user = null;
+
+        for(Users u : users) {
+            if(u.getUser_id().equals(request.getUser_id())) {
+                user = u;
+                break;
+            }
+        }
+
         Readings reading = new Readings();
         reading.setId(request.getReading_id());
         reading.setCard1(request.getCard1());
@@ -64,14 +74,17 @@ public class JohnReadingService {
         reading.setDescription(request.getDescription());
         reading.setDate(Timestamp.valueOf(LocalDateTime.now()));
         reading.setCategory(category);
+        reading.setUser(user);
 
         return readingRepository.save(reading);
     }
 
     public void deleteReading(JohnNewReadingRequest request) {
-        Readings reading = new Readings();
-        reading.setId(request.getReading_id());
-        readingRepository.delete(reading);
+        Readings reading = readingRepository.findReadingById(request.getReading_id());
+//        reading.setCategory(null);
+//        reading.setUser(null);
+        System.out.println(reading);
+        readingRepository.deleteReadingById(request.getReading_id());
     }
 
     public List<Readings> getAllReadings() {

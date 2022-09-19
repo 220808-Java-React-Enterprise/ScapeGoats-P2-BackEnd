@@ -56,6 +56,6 @@ public class JohnReadingController {
     @DeleteMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String deleteReading(@RequestBody JohnNewReadingRequest request) {
         readingService.deleteReading(request);
-        return request.getReading_id();
+        return "Reading deleted....";
     }
 }
