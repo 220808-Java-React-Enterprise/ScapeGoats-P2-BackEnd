@@ -3,6 +3,7 @@ package com.revature.tarotcards.p2scapegoats.models.melissa;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -19,7 +20,7 @@ public class Readings {
     @Column(name = "description", nullable = false)
     private String description;
     @Column(name = "date", nullable = false)
-    private Date date;
+    private Timestamp date;
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable = false)
@@ -34,7 +35,14 @@ public class Readings {
     public Readings() {
     }
 
-    public Readings(String id, String card1, String card2, String card3, String description, Date date, Users user, Categories category) {
+    public Readings(String id, String card1, String card2, String card3) {
+        this.id = id;
+        this.card1 = card1;
+        this.card2 = card2;
+        this.card3 = card3;
+    }
+
+    public Readings(String id, String card1, String card2, String card3, String description, Timestamp date, Users user, Categories category) {
         this.id = id;
         this.card1 = card1;
         this.card2 = card2;
@@ -89,7 +97,7 @@ public class Readings {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
@@ -108,6 +116,8 @@ public class Readings {
     public void setCategory(Categories category) {
         this.category = category;
     }
+
+
 
     @Override
     public String toString() {

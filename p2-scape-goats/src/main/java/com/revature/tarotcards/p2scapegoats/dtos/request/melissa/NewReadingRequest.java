@@ -1,5 +1,6 @@
 package com.revature.tarotcards.p2scapegoats.dtos.request.melissa;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class NewReadingRequest {
@@ -9,14 +10,14 @@ public class NewReadingRequest {
     private String card2;
     private String card3;
     private String description;
-    private Date date;
+    private Timestamp date;
     private String user_id;
     private String category_id;
 
     public NewReadingRequest() {
     }
 
-    public NewReadingRequest(String id, String card1, String card2, String card3, String description, Date date, String user_id, String category_id) {
+    public NewReadingRequest(String id, String card1, String card2, String card3, String description, Timestamp date, String user_id, String category_id) {
         this.id = id;
         this.card1 = card1;
         this.card2 = card2;
@@ -83,11 +84,11 @@ public class NewReadingRequest {
         this.description = description;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 

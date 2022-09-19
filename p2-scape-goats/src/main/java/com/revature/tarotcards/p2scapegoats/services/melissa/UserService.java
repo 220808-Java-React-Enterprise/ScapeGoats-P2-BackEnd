@@ -31,14 +31,14 @@ public class UserService {
 
     public Users addUser(NewUserRequest request){
         Users users = null;
-        if (isDuplicateUsername(request.getUsername())) {
+        if (!isDuplicateUsername(request.getUsername())) {
             if (isValidPassword(request.getPassword())) {
                 if (isValidUsername(request.getUsername())) {
                     users = new Users(UUID.randomUUID().toString(), request.getUsername(), request.getFirstname(), request.getLastname(), request.getPassword(), request.getEmail(), roleRepo.findByTitle("user"), false);
                     userRepo.save(users);
                 }
             }
-        }
+       }
         return users;
     }
     public boolean isValidPassword(String password){
