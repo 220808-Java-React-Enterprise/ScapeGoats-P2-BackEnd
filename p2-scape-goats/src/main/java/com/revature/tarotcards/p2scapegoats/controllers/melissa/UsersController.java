@@ -22,7 +22,7 @@ public class UsersController {
     }
 
     @CrossOrigin
-    @ExceptionHandler(value= {ResourceConflictException.class, InvalidRequestException.class})  //maybe not right?
+    //@ExceptionHandler(value= {ResourceConflictException.class, InvalidRequestException.class})  //maybe not right?
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/signup", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String signup(@RequestBody NewUserRequest request){
@@ -34,7 +34,8 @@ public class UsersController {
         return userService.getAll();
     }
 
-    /*@ExceptionHandler
+
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public @ResponseBody ResourceConflictException handleResourceConflictException(ResourceConflictException e){
         return e;
@@ -43,5 +44,5 @@ public class UsersController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody InvalidRequestException handleInvalidRequestException(InvalidRequestException e){
         return e;
-    }*/
+    }
 }
