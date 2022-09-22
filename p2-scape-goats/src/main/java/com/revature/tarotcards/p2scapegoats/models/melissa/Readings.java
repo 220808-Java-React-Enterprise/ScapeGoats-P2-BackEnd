@@ -22,12 +22,12 @@ public class Readings {
     @Column(name = "date", nullable = false)
     private Timestamp date;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="user_id", nullable = false)
     @JsonBackReference
     private Users user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="category_id", nullable = false)
     @JsonBackReference
     private Categories category;

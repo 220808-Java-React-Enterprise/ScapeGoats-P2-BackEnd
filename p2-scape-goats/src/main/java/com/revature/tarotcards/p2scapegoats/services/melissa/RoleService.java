@@ -6,8 +6,8 @@ import com.revature.tarotcards.p2scapegoats.repositories.melissa.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.management.relation.Role;
 import java.util.List;
+import java.util.Optional;
 
 @Service  //bean that talks to other beans - beans are singleton design patterns
 public class RoleService {
@@ -21,6 +21,13 @@ public class RoleService {
     public List<Roles> getAll(){
         return (List<Roles>) roleRepo.findAll();
     }
+
+    public Roles findByRole_id(String roleId) {
+        return roleRepo.findByRole_id(roleId);
+
+
+    }
+
 
     public Roles addRole(NewRoleRequest request){
         Roles role = new Roles(request.getRole_id(), request.getTitle());

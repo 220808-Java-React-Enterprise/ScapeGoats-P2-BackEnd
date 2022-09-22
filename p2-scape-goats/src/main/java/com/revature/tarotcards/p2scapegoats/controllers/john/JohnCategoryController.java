@@ -2,8 +2,14 @@ package com.revature.tarotcards.p2scapegoats.controllers.john;
 
 
 import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewCategoryRequest;
+import com.revature.tarotcards.p2scapegoats.dtos.john.response.JohnPrincipal;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Categories;
+import com.revature.tarotcards.p2scapegoats.models.melissa.Roles;
+import com.revature.tarotcards.p2scapegoats.models.melissa.Users;
 import com.revature.tarotcards.p2scapegoats.services.john.JohnCategoryService;
+import com.revature.tarotcards.p2scapegoats.services.melissa.RoleService;
+import com.revature.tarotcards.p2scapegoats.services.melissa.TokenService;
+import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.AuthenticationException;
 import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.InvalidRequestException;
 import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.ResourceConflictException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,74 +18,96 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
-@RequestMapping("/categories")
+@RequestMapping("/john/categories")
 public class JohnCategoryController {
 
     @Autowired
     private JohnCategoryService categoryService;
+    @Autowired
+    private TokenService tokenService;
 
+    @Autowired
+    private RoleService roleService;
 
-    // To POST(CREATE) a catagory use POSTMAN and enter url: http://localhost:8080/p2-scape-goats/categories
-    // Use POSTMAN body for application/text below:
-    /*
-        {
-            "category" : "NAME OF CATEGORY HERE"
-        }
-    */
-    @CrossOrigin
+    @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @PostMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Categories createCategory(@RequestBody JohnNewCategoryRequest request) {
-
-        return categoryService.save(request);
+    public @ResponseBody Categories createCategory(
+            @RequestHeader(value = "authorization") String token,
+            @RequestBody JohnNewCategoryRequest request) {
+        if (token == null) {
+            throw new AuthenticationException("Sorry, you are not authorized to make this request");
+        }
+        //String sessionToken = (String) session.getAttribute("token");
+        JohnPrincipal principal = tokenService.extractRequesterDetails(token);
+        Roles role = roleService.findByRole_id(principal.getRole());
+        if (role.getTitle().equalsIgnoreCase("USERS"));
+        {
+            return categoryService.save(request);
+        }
     }
 
-
-    // To PUT(UPDATE) a catagory use POSTMAN and enter url: http://localhost:8080/p2-scape-goats/categories
-    // Use POSTMAN body for application.text below
-    /*
-        {
-            {
-                "id": "8e00c11e-03bf-4e49-9f0a-8655d9bd82a5",
-                "category": "FINANCE"
-             }
-        }
-    */
-    @CrossOrigin
+    @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Categories updateCategory(@RequestBody JohnNewCategoryRequest request) {
         return categoryService.update(request);
     }
-
-
-
-    // To GET aLL catagories use POSTMAN and enter url: http://localhost:8080/p2-scape-goats/categories
-    @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @CrossOrigin(exposedHeaders = "authorization")
+    @ExceptionHandler(value = {
+            AuthenticationException.class, ResourceConflictException.class,
+            InvalidRequestException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Categories> getAll() {
-        return categoryService.getAllCategories();
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Categories> getAll(@RequestHeader(value = "authorization") String token, HttpSession session){
+        if (token == null) {
+            throw new AuthenticationException("Sorry, you are not authorized to make this request");
+        }
+
+        JohnPrincipal principal = tokenService.extractRequesterDetails(token);
+        Roles role = roleService.findByRole_id(principal.getRole());
+        if (role.getTitle().equalsIgnoreCase("USERS") || role.getTitle().equalsIgnoreCase("ADMIN"));
+        {
+            return categoryService.getAllCategories();
+        }
     }
 
-    // To DELETE a Category use POSTMAN and enter url: http://localhost:8080/p2-scape-goats/categories
-    // Use POSTMAN body for application.text below
-    /*
-        "category": "LOVE"
-    */
-    @CrossOrigin
+    @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @DeleteMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody String deleteCategory(@RequestBody JohnNewCategoryRequest request) {
-        categoryService.deleteCategory(request);
-        return request.getCategory();
+    public @ResponseBody String deleteCategory(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewCategoryRequest request) {
+        if (token == null) {
+            throw new AuthenticationException("Sorry, you are not authorized to make this request");
+        }
+
+        JohnPrincipal principal = tokenService.extractRequesterDetails(token);
+        Roles role = roleService.findByRole_id(principal.getRole());
+        if (role.getTitle().equalsIgnoreCase("USERS"));
+        {
+            //categoryService.deleteCategory(request);
+            return "Deleted: " + request.getCategory();
+        }
+
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody InvalidRequestException handleInvalidRequestException(InvalidRequestException e) {
+        return e;
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public @ResponseBody AuthenticationException handleAuthenticationException(AuthenticationException e) {
+        return e;
     }
 
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="categories")
@@ -23,7 +24,7 @@ public class Categories {
             cascade = CascadeType.ALL
     )
     @JsonManagedReference
-    private List<Categories> categories;
+    private Set<Readings> readings;
 
     @OneToMany(
             mappedBy = "categories",
@@ -31,7 +32,7 @@ public class Categories {
             cascade = CascadeType.ALL
     )
     @JsonManagedReference
-    private List<Questions> questions;
+    private Set<Questions> questions;
 
     public Categories() {
     }
@@ -57,11 +58,29 @@ public class Categories {
         this.category = category;
     }
 
+    public Set<Readings> getReadings() {
+        return readings;
+    }
+
+    public void setReadings(Set<Readings> readings) {
+        this.readings = readings;
+    }
+
+    public Set<Questions> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<Questions> questions) {
+        this.questions = questions;
+    }
+
     @Override
     public String toString() {
         return "Categories{" +
                 "category_id='" + category_id + '\'' +
                 ", category='" + category + '\'' +
+                ", readings=" + readings +
+                ", questions=" + questions +
                 '}';
     }
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/readings")
 public class JohnReadingController {
     @Autowired
@@ -40,8 +40,7 @@ public class JohnReadingController {
 
         return readingService.update(request);
     }
-
-    @CrossOrigin
+    @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
