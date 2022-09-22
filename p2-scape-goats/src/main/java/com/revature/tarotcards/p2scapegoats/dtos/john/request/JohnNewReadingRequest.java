@@ -12,6 +12,8 @@ public class JohnNewReadingRequest {
 
     private String category;
 
+    private String category_id;
+
 
     public JohnNewReadingRequest() {
 
@@ -19,6 +21,14 @@ public class JohnNewReadingRequest {
 
     public String getUser_id() {
         return user_id;
+    }
+
+    public String getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
     }
 
     public void setUser_id(String user_id) {
@@ -75,8 +85,9 @@ public class JohnNewReadingRequest {
 
     @Override
     public String toString() {
-        return "NewReadingRequest{" +
-                "reading_id='" + reading_id + '\'' +
+        return "JohnNewReadingRequest{" +
+                "user_id='" + user_id + '\'' +
+                ", reading_id='" + reading_id + '\'' +
                 ", card1='" + card1 + '\'' +
                 ", card2='" + card2 + '\'' +
                 ", card3='" + card3 + '\'' +

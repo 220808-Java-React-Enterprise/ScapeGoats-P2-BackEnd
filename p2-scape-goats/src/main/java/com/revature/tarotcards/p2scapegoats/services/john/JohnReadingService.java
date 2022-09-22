@@ -5,12 +5,15 @@ import com.revature.tarotcards.p2scapegoats.models.melissa.Readings;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Users;
 import com.revature.tarotcards.p2scapegoats.repositories.john.JohnReadingRepository;
 import com.revature.tarotcards.p2scapegoats.repositories.john.JohnUserRepository;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,8 +30,8 @@ public class JohnReadingService {
 
     public Readings save(JohnNewReadingRequest request) {
 
-        Categories category = categoryService.findCategoryByCategory(request.getCategory());
         List<Users> users = (List<Users>) johnUserRepository.findAll();
+
         Users user = null;
 
         for(Users u : users) {
@@ -37,7 +40,6 @@ public class JohnReadingService {
                 break;
             }
         }
-        System.out.println("Category : " + category);
         Readings reading = new Readings(
                 UUID.randomUUID().toString(),
                 request.getCard1(),
@@ -45,11 +47,10 @@ public class JohnReadingService {
                 request.getCard3());
         reading.setDescription(request.getDescription());
         reading.setDate(Timestamp.valueOf(LocalDateTime.now()));
-        reading.setCategory(category);
+        reading.setCategory(new Categories());
+        reading.getCategory().setCategory_id(request.getCategory_id());
         reading.setUser(user);
-        System.out.println(reading);
 
-        //return reading;
         return readingRepository.save(reading);
 
     }
@@ -80,11 +81,10 @@ public class JohnReadingService {
     }
 
     public void deleteReading(JohnNewReadingRequest request) {
-        Readings reading = readingRepository.findReadingById(request.getReading_id());
-//        reading.setCategory(null);
-//        reading.setUser(null);
-        System.out.println(reading);
-        readingRepository.deleteReadingById(request.getReading_id());
+        Readings reading = new Readings();
+        reading.setId(request.getReading_id());
+        System.out.println(reading.getId());
+        readingRepository.deleteReadingById(reading.getId());
     }
 
     public List<Readings> getAllReadings() {

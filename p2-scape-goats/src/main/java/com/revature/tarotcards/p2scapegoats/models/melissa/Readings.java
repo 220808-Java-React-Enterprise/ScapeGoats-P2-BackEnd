@@ -34,9 +34,6 @@ public class Readings {
 
     public Readings() {
     }
-
-
-
     public Readings(String id, String card1, String card2, String card3) {
         this.id = id;
         this.card1 = card1;
@@ -44,7 +41,8 @@ public class Readings {
         this.card3 = card3;
     }
 
-    public Readings(String id, String card1, String card2, String card3, String description, Timestamp date, Users user, Categories category) {
+    public Readings(String id, String card1, String card2, String card3,
+                    String description, Timestamp date, Users user, Categories category) {
         this.id = id;
         this.card1 = card1;
         this.card2 = card2;
@@ -118,7 +116,6 @@ public class Readings {
     public void setCategory(Categories category) {
         this.category = category;
     }
-
 
 
     @Override

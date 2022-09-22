@@ -32,8 +32,6 @@ public class JohnQuestionController {
 
     @Autowired
     private JohnCategoryService categoryService;
-
-
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class, InvalidSQLException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)

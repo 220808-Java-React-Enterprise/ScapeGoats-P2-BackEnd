@@ -4,6 +4,7 @@ public class JohnNewCategoryRequest {
 
     private String id;
 
+
     private String category;
 
     public JohnNewCategoryRequest() {
@@ -29,4 +30,7 @@ public class JohnNewCategoryRequest {
     public void setCategory(String category) {
         this.category = category;
     }
+
+
+
 }
