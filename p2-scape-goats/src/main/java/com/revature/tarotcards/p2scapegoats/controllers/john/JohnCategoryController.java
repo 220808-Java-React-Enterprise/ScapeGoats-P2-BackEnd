@@ -36,7 +36,7 @@ public class JohnCategoryController {
 
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Categories createCategory(
             @RequestHeader(value = "authorization") String token,
@@ -55,7 +55,7 @@ public class JohnCategoryController {
 
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Categories updateCategory(@RequestBody JohnNewCategoryRequest request) {
         return categoryService.update(request);
@@ -81,7 +81,7 @@ public class JohnCategoryController {
 
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @DeleteMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String deleteCategory(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewCategoryRequest request) {
         if (token == null) {

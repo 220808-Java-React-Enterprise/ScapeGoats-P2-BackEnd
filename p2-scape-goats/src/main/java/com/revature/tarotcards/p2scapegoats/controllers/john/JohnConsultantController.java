@@ -35,7 +35,7 @@ public class JohnConsultantController {
 
     @CrossOrigin
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Consultants createConsultant(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewConsultantRequest request) {
         if (token == null) {
@@ -54,7 +54,7 @@ public class JohnConsultantController {
 
     @CrossOrigin
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Consultants updateConsultant(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewConsultantRequest request) {
 
@@ -75,7 +75,7 @@ public class JohnConsultantController {
 
     @CrossOrigin
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Consultants> getAll(@RequestHeader(value = "authorization") String token) {
         if (token == null) {
@@ -93,7 +93,7 @@ public class JohnConsultantController {
 
     @CrossOrigin
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @DeleteMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String deleteConsultant(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewConsultantRequest request) {
         if (token == null) {

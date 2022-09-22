@@ -32,7 +32,7 @@ public class JohnReadingController {
 
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class, InvalidSQLException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody JohnNewReadingRequest createReading(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewReadingRequest request) {
         if (token == null) {
@@ -52,7 +52,7 @@ public class JohnReadingController {
 
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Readings updateReading(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewReadingRequest request) {
         if (token == null) {
@@ -69,7 +69,7 @@ public class JohnReadingController {
     }
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Readings> getAll(@RequestHeader(value = "authorization") String token) {
 
@@ -88,7 +88,7 @@ public class JohnReadingController {
 
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @DeleteMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String deleteReading(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewReadingRequest request) {
 

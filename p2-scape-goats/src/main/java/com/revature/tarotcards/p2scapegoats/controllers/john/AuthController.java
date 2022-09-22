@@ -27,6 +27,7 @@ public class AuthController {
     @Autowired
     private JohnUserService userService;
     @CrossOrigin(exposedHeaders = "authorization")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping(value = "/login", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody JohnPrincipal login(@RequestBody JohnLoginRequest request, HttpSession session, HttpServletResponse response) throws IOException {
 

@@ -34,7 +34,7 @@ public class JohnQuestionController {
     private JohnCategoryService categoryService;
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class, InvalidSQLException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Questions createQuestion(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewQuestionRequest request) {
         if (token == null) {
@@ -50,7 +50,7 @@ public class JohnQuestionController {
     }
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Questions updateQuestion(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewQuestionRequest request) {
         if (token == null) {
@@ -66,7 +66,7 @@ public class JohnQuestionController {
     }
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Questions> getAll(@RequestHeader(value = "authorization") String token) {
 
@@ -84,7 +84,7 @@ public class JohnQuestionController {
     }
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @DeleteMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String deleteQuestion(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewQuestionRequest request) {
         if (token == null) {
