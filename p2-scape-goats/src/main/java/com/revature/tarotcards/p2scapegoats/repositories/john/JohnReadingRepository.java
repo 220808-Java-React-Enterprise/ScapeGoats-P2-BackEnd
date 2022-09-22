@@ -9,12 +9,12 @@ import java.util.List;
 
 public interface JohnReadingRepository extends CrudRepository<Readings, String> {
 
-    @Query(value = "SELECT * FROM readings WHERE id = ?1", nativeQuery = true)
-    List<Readings> findReadingById(String id);
+    @Query(value = "SELECT * FROM readings WHERE user_id = ?1", nativeQuery = true)
+    List<Readings> findReadingById(String userid);
 
 
     @Query(value = "DELETE FROM readings WHERE id = ?1", nativeQuery = true)
-    void deleteReadingById(String id);
+    void deleteReadingById(String userid);
 
 //FKrwj5v69sohlqxpioou1871h4v
 }
