@@ -35,7 +35,8 @@ public class AuthController {
                 "password": "Passw0rd@"
             }
      */
-    @CrossOrigin // CORS
+    @CrossOrigin (exposedHeaders = "authorization") // CORS
+
     @PostMapping(value = "/login", consumes = "application/json")
     public void login(@RequestBody JohnLoginRequest request, HttpServletResponse response) throws IOException {
         //sg-06c920b7de7968f90
@@ -44,7 +45,7 @@ public class AuthController {
         JohnPrincipal principal = userService.login(request);
         String token = tokenService.generateToken(principal);
         response.setStatus(200);
-        response.setHeader("Authorization", token);
+        response.setHeader("authorization", token);
         response.setContentType("application/json");
         response.getWriter().write(mapper.writeValueAsString(principal));
     }

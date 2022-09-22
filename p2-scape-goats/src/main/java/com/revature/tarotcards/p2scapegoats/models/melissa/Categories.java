@@ -14,7 +14,7 @@ public class Categories {
     @Id // Primary Key
     private String category_id;
 
-    @Column(name="category", nullable = false)
+    @Column(name="category", nullable = false, unique = true)
     private String category;
 
     @OneToMany(

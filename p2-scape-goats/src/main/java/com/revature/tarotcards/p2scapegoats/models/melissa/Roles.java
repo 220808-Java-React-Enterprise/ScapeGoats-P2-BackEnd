@@ -14,7 +14,7 @@ public class Roles {
     @Id //primary key
     private String role_id;
 
-    @Column(name="title", nullable = false)
+    @Column(name="title", nullable = false, unique = true)
     private String title;
 
     /*
