@@ -4,8 +4,9 @@
 
 ## Story
 
-Life got you down?  Are you lost?  Not sure what move to make next?  With Tarot Card reading you can have access to a Psychic that will tell you your future and answer you most important life questions in your own home and no appointment needed.  With a click of a mouse you can learn more about your career, lovelife, pet's happiness, and anything else you are in search of.  Should you sell everything and move into the woods?  Buy a house you can't afford?  A psychic can make all these decisions easier.  
-With Reality Escape Cards, you can pull up previous readings to compare and make current choices.  Consultants are always online to help you cope with your impending death or poverty.
+Life got you down? Are you lost? Not sure what move to make next? With a Reality Escape Cards reading you can have access to a Psychic that will tell you your future and provide answers to your most pressing life questions, all from the comfort of your own home with no appointment needed. With Reality Escape Cards you are just one mouse click away from learning more about your career, love life, pet's happiness, or anything else you may be in search of answers for. Should you sell everything and move into the woods? Buy a house you can't afford? A psychic can make all these decisions easier.
+With Reality Escape Cards, you can pull up previous readings to compare and make current choices. Consultants are always online to help you cope with your impending doom or prosperity.
+
 
 ## Team Members
 
@@ -40,6 +41,10 @@ With Reality Escape Cards, you can pull up previous readings to compare and make
 * Reviews of Consultants
 * User can view reviews of consultants
 
+## Use Case
+
+![2022-09-21 (3)](https://user-images.githubusercontent.com/107011138/192028006-ddc2bb12-0b59-4e83-beb4-3fd8e39c4216.png)
+
 ## ERD
 
 ![image](https://user-images.githubusercontent.com/37430000/189683846-a3a92923-5265-4183-a82c-1b860bf7f2fe.png)
@@ -47,12 +52,8 @@ With Reality Escape Cards, you can pull up previous readings to compare and make
 
 ### Usage
 
-TBD
+Upon visiting our site, a user will be prompted to either sign up or login. A user can sign up by providing an email and creating a username and password. Once the account is created they will be able to login with those credentials. Once logged in a user can choose to receive a tarot reading by selecting a question category and a related question from that category that they would like to receive a reading for. The user will then receive three tarot cards as their reading which possess various meanings. The user can then either choose to save or discard their reading. If saved the user can then view that reading in their reading history where all saved readings are stored. The user also has the ability to change their login credentials. Users can also request a consultation with a third-party consultant if they wish to discuss their reading.
 
-
-### Brief
-
-TBD
 
 ### Technology
 
@@ -82,21 +83,40 @@ TBD
 
 * Present Proposal
 
-### Phase 1 (TBD)
+### Phase 1 (9/9 - 9/12)
 
-TBD
+-	Create ERD
+-	Set up database in DBeaver
+-	Create rough design for frontend
+-	Select an external API
+-	Create roles and category models and controllers for backend use
 
-### Phase 2 (TBD)
 
-TBD
 
-### Phase 3 (TBD)
+### Phase 2 (9/13 - 9/16)
 
-TBD
+-	Create all object models in the backend
+-	Create landing page
+-	Create a login and sign-up page
+-	Create webpage for the admin users on the backend
+-	Create remaining pages (history, settings, tarot reading)
 
-### Final (TBD)
 
-* Project Presentations
+### Phase 3 (9/17 - 9/21)
+
+-	Achieve 80% test coverage on the backend
+-	Select and implement a CSS style
+-	Set up ec2 instance 
+-	Have data from the frontend save to the database
+-	Get the tarot card images to show on reading page
+-	Get authentication token from headers with axios
+-	Clean up code
+
+
+### Final (921 - 9/25)
+
+-	Finalize code, code freeze 9/22
+-	Rehearse for presentation
 
 ## Contributors
 
