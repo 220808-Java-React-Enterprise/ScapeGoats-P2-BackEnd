@@ -34,8 +34,16 @@ public class JohnCategoryController {
     @Autowired
     private RoleService roleService;
 
+
+ 
+    // To POST(CREATE) a catagory use POSTMAN and enter url: http://localhost:8080/p2-scape-goats/categories
+    // Use POSTMAN body for application/text below:
+    /*
+        {
+            "category" : "NAME OF CATEGORY HERE"
+        }
+    */
     @CrossOrigin(exposedHeaders = "authorization")
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Categories createCategory(
@@ -51,20 +59,18 @@ public class JohnCategoryController {
         {
             return categoryService.save(request);
         }
+
     }
 
     @CrossOrigin(exposedHeaders = "authorization")
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Categories updateCategory(@RequestBody JohnNewCategoryRequest request) {
         return categoryService.update(request);
     }
+
     @CrossOrigin(exposedHeaders = "authorization")
-    @ExceptionHandler(value = {
-            AuthenticationException.class, ResourceConflictException.class,
-            InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Categories> getAll(@RequestHeader(value = "authorization") String token, HttpSession session){
         if (token == null) {
@@ -79,9 +85,13 @@ public class JohnCategoryController {
         }
     }
 
+    // To DELETE a Category use POSTMAN and enter url: http://localhost:8080/p2-scape-goats/categories
+    // Use POSTMAN body for application.text below
+    /*
+        "category": "LOVE"
+    */
     @CrossOrigin(exposedHeaders = "authorization")
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @ResponseStatus(value = HttpStatus.CREATED)
     @DeleteMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String deleteCategory(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewCategoryRequest request) {
         if (token == null) {
@@ -107,6 +117,12 @@ public class JohnCategoryController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public @ResponseBody AuthenticationException handleAuthenticationException(AuthenticationException e) {
+        return e;
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public @ResponseBody ResourceConflictException handleResourceConflictException(ResourceConflictException e){
         return e;
     }
 

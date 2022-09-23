@@ -96,13 +96,8 @@ public class JohnReadingService {
         return (List<Readings>) readingRepository.findAll();
     }
 
+    public List<Readings> getAllByUserId(String userId){
+        return readingRepository.findReadingById(userId);
 
-
-    public Readings getReadingById(String readingId) {
-        return readingRepository.findReadingById(readingId);
-    }
-
-    public List<Readings> getAllReadingByUserId(String userId) {
-        return readingRepository.getAllReadingByUserId(userId);
     }
 }

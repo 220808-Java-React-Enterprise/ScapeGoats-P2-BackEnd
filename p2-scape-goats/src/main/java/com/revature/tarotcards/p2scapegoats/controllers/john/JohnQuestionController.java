@@ -29,9 +29,10 @@ public class JohnQuestionController {
 
     @Autowired
     private RoleService roleService;
-
+    
     @Autowired
     private JohnCategoryService categoryService;
+    
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class, InvalidSQLException.class})
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -48,9 +49,22 @@ public class JohnQuestionController {
             return questionService.save(request);
         }
     }
+
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
     @ResponseStatus(value = HttpStatus.ACCEPTED)
+
+    // POSTMAN url => http://localhost:8080/p2-scape-goats/questions
+    // BODY OF POSTMAN
+    /*
+            {
+                "id": "a4001f08-8bd1-475c-98f0-6acda16bf7e0",
+                "question": "Will I get a divorce UPDATED UPDATED?",
+                "category_id": "b1fcb4f1-7e59-45c7-9ad4-fe7e7935a096"
+            }
+     */
+    
+
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Questions updateQuestion(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewQuestionRequest request) {
         if (token == null) {
@@ -64,9 +78,13 @@ public class JohnQuestionController {
             return questionService.update(request);
         }
     }
+
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
     @ResponseStatus(value = HttpStatus.ACCEPTED)
+    
+    // POSTMAN url => http://localhost:8080/p2-scape-goats/questions
+
     @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Questions> getAll(@RequestHeader(value = "authorization") String token) {
 
@@ -80,6 +98,7 @@ public class JohnQuestionController {
         {
             return questionService.getAllQuestions();
         }
+
 
     }
     @CrossOrigin(exposedHeaders = "authorization")
@@ -98,6 +117,18 @@ public class JohnQuestionController {
             questionService.deleteQuestion(request);
             return request.getId();
         }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public @ResponseBody ResourceConflictException handleResourceConflictException(ResourceConflictException e){
+        return e;
+    }
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody InvalidRequestException handleInvalidRequestException(InvalidRequestException e){
+        return e;
+    }
+
 
     }
 }
