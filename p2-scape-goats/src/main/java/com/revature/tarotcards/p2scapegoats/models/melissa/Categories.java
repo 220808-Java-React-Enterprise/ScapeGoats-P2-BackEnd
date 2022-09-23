@@ -23,8 +23,9 @@ public class Categories {
             fetch = FetchType.EAGER,
             cascade = CascadeType.ALL
     )
+    
     @JsonManagedReference
-    private Set<Readings> readings;
+    private List<Readings> readings;
 
     @OneToMany(
             mappedBy = "categories",

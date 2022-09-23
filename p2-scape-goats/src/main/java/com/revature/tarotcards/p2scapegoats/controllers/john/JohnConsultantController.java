@@ -32,8 +32,7 @@ public class JohnConsultantController {
     private RoleService roleService;
 
 
-    @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @CrossOrigin(exposedHeaders = "authorization")
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Consultants createConsultant(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewConsultantRequest request) {
@@ -51,9 +50,8 @@ public class JohnConsultantController {
     }
 
 
-    @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @CrossOrigin(exposedHeaders = "authorization")
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Consultants updateConsultant(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewConsultantRequest request) {
 
@@ -72,9 +70,8 @@ public class JohnConsultantController {
 
 
 
-    @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @CrossOrigin(exposedHeaders = "authorization")
+    @ResponseStatus(value = HttpStatus.CREATED)
     @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Consultants> getAll(@RequestHeader(value = "authorization") String token) {
         if (token == null) {
@@ -90,9 +87,8 @@ public class JohnConsultantController {
 
     }
 
-    @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @CrossOrigin(exposedHeaders = "authorization")
+    @ResponseStatus(value = HttpStatus.CREATED)
     @DeleteMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String deleteConsultant(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewConsultantRequest request) {
         if (token == null) {
@@ -106,6 +102,17 @@ public class JohnConsultantController {
             consultantService.deleteConsultant(request);
         }
         return "Deleted : " +  request.getId();
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public @ResponseBody ResourceConflictException handleResourceConflictException(ResourceConflictException e){
+        return e;
+    }
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody InvalidRequestException handleInvalidRequestException(InvalidRequestException e){
+        return e;
     }
 
 }

@@ -25,6 +25,7 @@ public class JohnReadingController {
     @Autowired
     private JohnReadingService readingService;
 
+
     @Autowired
     private TokenService tokenService;
 
@@ -35,8 +36,16 @@ public class JohnReadingController {
     private UserService userService;
 
     @CrossOrigin(exposedHeaders = "authorization")
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class, InvalidSQLException.class})
     @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping(value = "/byid", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Readings> getAllById(@RequestBody JohnNewReadingRequest request) {
+
+        return readingService.getAllByUserId(request.getUser_id());
+
+    }
+
+    @CrossOrigin(exposedHeaders = "authorization")
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody JohnNewReadingRequest createReading(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewReadingRequest request) {
         if (token == null) {
@@ -54,8 +63,8 @@ public class JohnReadingController {
     }
 
 
+
     @CrossOrigin(exposedHeaders = "authorization")
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Readings updateReading(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewReadingRequest request) {
@@ -69,10 +78,8 @@ public class JohnReadingController {
         {
             return readingService.update(request);
         }
-
     }
     @CrossOrigin(exposedHeaders = "authorization")
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Readings> getAll(@RequestHeader(value = "authorization") String token) {
@@ -110,7 +117,6 @@ public class JohnReadingController {
     }
 
     @CrossOrigin(exposedHeaders = "authorization")
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     @DeleteMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String deleteReading(@RequestHeader(value = "authorization") String token, @RequestBody JohnNewReadingRequest request) {
@@ -131,5 +137,16 @@ public class JohnReadingController {
                 return "Reading deleted....";
             }
         }
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public @ResponseBody ResourceConflictException handleResourceConflictException(ResourceConflictException e){
+        return e;
+    }
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody InvalidRequestException handleInvalidRequestException(InvalidRequestException e){
+        return e;
     }
 }
