@@ -81,6 +81,15 @@ public class Users {
         this.role = role;
     }
 
+    public List<Readings> getReadings() {
+        return readings;
+    }
+
+    public void setReadings(List<Readings> readings) {
+        this.readings = readings;
+    }
+
+
     public Roles getRole() {
         return role;
     }

@@ -1,6 +1,7 @@
 package com.revature.tarotcards.p2scapegoats.services.melissa;
 
 import com.revature.tarotcards.p2scapegoats.dtos.request.melissa.NewUserRequest;
+import com.revature.tarotcards.p2scapegoats.models.melissa.Consultants;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Users;
 import com.revature.tarotcards.p2scapegoats.repositories.melissa.RoleRepository;
 import com.revature.tarotcards.p2scapegoats.repositories.melissa.UserRepository;
@@ -27,6 +28,13 @@ public class UserService {
 
     public List<Users> getAll(){
         return (List<Users>) userRepo.findAll();
+    }
+
+    public List<Consultants> getConsultants(String user_id){
+        Users user = userRepo.findUsersByUser_id(user_id);
+
+        // return null for now. otherwise get infinite recursion call. figure this out later
+        return null;
     }
 
     public Users addUser(NewUserRequest request){
@@ -66,4 +74,5 @@ public class UserService {
     public void delete(Users user){
         userRepo.delete(user);
     }
+
 }

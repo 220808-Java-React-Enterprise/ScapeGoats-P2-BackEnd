@@ -7,6 +7,7 @@ import com.revature.tarotcards.p2scapegoats.models.melissa.Roles;
 import com.revature.tarotcards.p2scapegoats.services.john.JohnReadingService;
 import com.revature.tarotcards.p2scapegoats.services.melissa.RoleService;
 import com.revature.tarotcards.p2scapegoats.services.melissa.TokenService;
+import com.revature.tarotcards.p2scapegoats.services.melissa.UserService;
 import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.AuthenticationException;
 import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.InvalidRequestException;
 import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.InvalidSQLException;
@@ -29,6 +30,9 @@ public class JohnReadingController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private UserService userService;
 
     @CrossOrigin(exposedHeaders = "authorization")
     @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class, InvalidSQLException.class})
@@ -82,6 +86,25 @@ public class JohnReadingController {
         if (role.getTitle().equalsIgnoreCase("USERS") || role.getTitle().equalsIgnoreCase("ADMIN"));
         {
             return readingService.getAllReadings();
+        }
+
+    }
+
+    @CrossOrigin(exposedHeaders = "authorization")
+    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    @RequestMapping(value="/userReading", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Readings> getAllReadingByUserId(@RequestHeader(value = "authorization") String token, @RequestParam(value="userId") String userId) {
+
+        if (token == null) {
+            throw new AuthenticationException("Sorry, you are not authorized to make this request");
+        }
+
+        JohnPrincipal principal = tokenService.extractRequesterDetails(token);
+        Roles role = roleService.findByRole_id(principal.getRole());
+        if (role.getTitle().equalsIgnoreCase("USERS") || role.getTitle().equalsIgnoreCase("ADMIN"));
+        {
+            return readingService.getAllReadingByUserId(userId);
         }
 
     }

@@ -89,4 +89,8 @@ public class JohnUserService {
         if (!password.equals(password2)) throw new InvalidRequestException("Password do not match :(");
         return true;
     }
+
+    public Users findUsersByUser_id(String id) {
+        return userRepo.findUsersByUser_id(id);
+    }
 }

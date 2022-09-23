@@ -1,6 +1,9 @@
 package com.revature.tarotcards.p2scapegoats.controllers.melissa;
 
+import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewCategoryRequest;
+import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewUserRequest;
 import com.revature.tarotcards.p2scapegoats.dtos.request.melissa.NewUserRequest;
+import com.revature.tarotcards.p2scapegoats.models.melissa.Consultants;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Users;
 import com.revature.tarotcards.p2scapegoats.services.melissa.UserService;
 import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.InvalidRequestException;
@@ -32,6 +35,12 @@ public class UsersController {
     @GetMapping(value = "/getall", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Users> getAll(){
         return userService.getAll();
+    }
+
+
+    @GetMapping(value = "/getConsultantsByUserId", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Consultants> getConsultantsByUserId(){
+        return userService.getConsultants("db00877b-02bf-46b9-80d5-e2b707ab64cf");
     }
 
 

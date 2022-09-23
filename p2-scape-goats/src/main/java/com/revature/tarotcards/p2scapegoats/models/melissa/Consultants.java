@@ -1,6 +1,7 @@
 package com.revature.tarotcards.p2scapegoats.models.melissa;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,8 +14,11 @@ public class Consultants {
     @Column(name="lastname", nullable = false)
     private String lastname;
 
-    @ManyToMany(
-            mappedBy = "consultants"
+    @ManyToMany
+    @JoinTable(
+            name = "consultations",
+            joinColumns = @JoinColumn(name="consultant_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     List<Users> users;
 
@@ -27,6 +31,13 @@ public class Consultants {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+    }
+
+    public void addUser(Users user) {
+        if(users == null) {
+            users = new ArrayList<>();
+        }
+        users.add(user);
     }
 
     public String getId() {

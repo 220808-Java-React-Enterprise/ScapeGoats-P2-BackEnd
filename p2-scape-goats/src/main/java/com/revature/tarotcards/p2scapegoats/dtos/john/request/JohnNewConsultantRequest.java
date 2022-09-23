@@ -4,6 +4,8 @@ public class JohnNewConsultantRequest {
 
     private String id;
 
+    private String user_id;
+
 
     private String firstName;
 
@@ -25,6 +27,14 @@ public class JohnNewConsultantRequest {
     public JohnNewConsultantRequest(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getId() {
