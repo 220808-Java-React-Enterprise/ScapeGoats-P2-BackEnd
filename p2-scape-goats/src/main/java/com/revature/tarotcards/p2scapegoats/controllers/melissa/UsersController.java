@@ -38,6 +38,12 @@ public class UsersController {
     }
 
 
+    @GetMapping(value = "/getConsultantsByUserId", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Consultants> getConsultantsByUserId(){
+        return userService.getConsultants("db00877b-02bf-46b9-80d5-e2b707ab64cf");
+    }
+
+
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public @ResponseBody ResourceConflictException handleResourceConflictException(ResourceConflictException e){

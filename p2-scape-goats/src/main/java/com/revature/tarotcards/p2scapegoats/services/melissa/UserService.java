@@ -32,6 +32,8 @@ public class UserService {
 
     public List<Consultants> getConsultants(String user_id){
         Users user = userRepo.findUsersByUser_id(user_id);
+
+        // return null for now. otherwise get infinite recursion call. figure this out later
         return null;
     }
 

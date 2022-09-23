@@ -35,7 +35,7 @@ public class AuthController {
         JohnPrincipal principal = userService.login(request);
         String token = tokenService.generateToken(principal);
 
-        // back up in-case token doesn't work
+        // back up in-case token on request doesn't work for other Controllers in project
         session.setAttribute("token", token);
 
         // make sure letter 'a' of authorization is not capital A
