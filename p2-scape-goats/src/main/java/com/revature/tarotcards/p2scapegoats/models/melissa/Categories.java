@@ -23,7 +23,7 @@ public class Categories {
             cascade = CascadeType.ALL
     )
     @JsonManagedReference
-    private List<Categories> categories;
+    private List<Readings> readings;
 
     @OneToMany(
             mappedBy = "categories",
