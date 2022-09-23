@@ -30,8 +30,8 @@ public class JohnCategoryController {
         }
     */
     @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Categories createCategory(@RequestBody JohnNewCategoryRequest request) {
 
@@ -50,8 +50,8 @@ public class JohnCategoryController {
         }
     */
     @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Categories updateCategory(@RequestBody JohnNewCategoryRequest request) {
         return categoryService.update(request);
@@ -61,8 +61,8 @@ public class JohnCategoryController {
 
     // To GET aLL catagories use POSTMAN and enter url: http://localhost:8080/p2-scape-goats/categories
     @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
     @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Categories> getAll() {
         return categoryService.getAllCategories();
@@ -74,12 +74,23 @@ public class JohnCategoryController {
         "category": "LOVE"
     */
     @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
     @DeleteMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String deleteCategory(@RequestBody JohnNewCategoryRequest request) {
         categoryService.deleteCategory(request);
         return request.getCategory();
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public @ResponseBody ResourceConflictException handleResourceConflictException(ResourceConflictException e){
+        return e;
+    }
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody InvalidRequestException handleInvalidRequestException(InvalidRequestException e){
+        return e;
     }
 
 }

@@ -38,8 +38,8 @@ public class JohnQuestionController {
      */
 
     @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class, InvalidSQLException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class, InvalidSQLException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Questions createQuestion(@RequestBody JohnNewQuestionRequest request) {
 
@@ -56,8 +56,8 @@ public class JohnQuestionController {
             }
      */
     @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Questions updateQuestion(@RequestBody JohnNewQuestionRequest request) {
 
@@ -67,8 +67,8 @@ public class JohnQuestionController {
 
     // POSTMAN url => http://localhost:8080/p2-scape-goats/questions
     @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
     @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Questions> getAll() {
         return questionService.getAllQuestions();
@@ -84,12 +84,23 @@ public class JohnQuestionController {
      */
 
     @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
     @DeleteMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String deleteQuestion(@RequestBody JohnNewQuestionRequest request) {
         questionService.deleteQuestion(request);
         return request.getId();
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public @ResponseBody ResourceConflictException handleResourceConflictException(ResourceConflictException e){
+        return e;
+    }
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody InvalidRequestException handleInvalidRequestException(InvalidRequestException e){
+        return e;
     }
 
 

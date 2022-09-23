@@ -22,8 +22,18 @@ public class JohnReadingController {
     private JohnReadingService readingService;
 
     @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class, InvalidSQLException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class, InvalidSQLException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
+    @GetMapping(value = "/byid", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Readings> getAllById(@RequestBody JohnNewReadingRequest request) {
+
+        return readingService.getAllByUserId(request.getUser_id());
+
+    }
+
+    @CrossOrigin
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class, InvalidSQLException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Readings createReading(@RequestBody JohnNewReadingRequest request) {
 
@@ -33,8 +43,8 @@ public class JohnReadingController {
 
 
     @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Readings updateReading(@RequestBody JohnNewReadingRequest request) {
 
@@ -42,8 +52,8 @@ public class JohnReadingController {
     }
 
     @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
     @GetMapping(value="", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Readings> getAll() {
         return readingService.getAllReadings();
@@ -51,11 +61,22 @@ public class JohnReadingController {
 
 
     @CrossOrigin
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    //@ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
+    @ResponseStatus(value = HttpStatus.CREATED)
     @DeleteMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody String deleteReading(@RequestBody JohnNewReadingRequest request) {
         readingService.deleteReading(request);
         return request.getReading_id();
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public @ResponseBody ResourceConflictException handleResourceConflictException(ResourceConflictException e){
+        return e;
+    }
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody InvalidRequestException handleInvalidRequestException(InvalidRequestException e){
+        return e;
     }
 }

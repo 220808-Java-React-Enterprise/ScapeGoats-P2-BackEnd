@@ -23,6 +23,10 @@ public class ReadingService {
         return (List<Readings>) readingRep.findAll();
     }
 
+    public List<Readings> getAllByUserId(String userId){
+        return readingRep.getAllByUserId(userId);
+    }
+
     public String addReading(NewReadingRequest request){
         Readings reading = new Readings(UUID.randomUUID().toString(), request.getCard1(), request.getCard2(), request.getCard3(), request.getDescription(), request.getDate(), new Users(), new Categories());
         readingRep.save(reading);
