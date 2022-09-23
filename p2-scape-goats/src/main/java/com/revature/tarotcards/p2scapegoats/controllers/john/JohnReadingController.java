@@ -97,24 +97,7 @@ public class JohnReadingController {
 
     }
 
-    @CrossOrigin(exposedHeaders = "authorization")
-    @ExceptionHandler(value = {ResourceConflictException.class, InvalidRequestException.class})
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
-    @RequestMapping(value="/userReading", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Readings> getAllReadingByUserId(@RequestHeader(value = "authorization") String token, @RequestParam(value="userId") String userId) {
 
-        if (token == null) {
-            throw new AuthenticationException("Sorry, you are not authorized to make this request");
-        }
-
-        JohnPrincipal principal = tokenService.extractRequesterDetails(token);
-        Roles role = roleService.findByRole_id(principal.getRole());
-        if (role.getTitle().equalsIgnoreCase("USERS") || role.getTitle().equalsIgnoreCase("ADMIN"));
-        {
-            return readingService.getAllReadingByUserId(userId);
-        }
-
-    }
 
     @CrossOrigin(exposedHeaders = "authorization")
     @ResponseStatus(value = HttpStatus.ACCEPTED)

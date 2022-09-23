@@ -117,6 +117,8 @@ public class JohnQuestionController {
             questionService.deleteQuestion(request);
             return request.getId();
         }
+    }
+
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
@@ -127,8 +129,5 @@ public class JohnQuestionController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody InvalidRequestException handleInvalidRequestException(InvalidRequestException e){
         return e;
-    }
-
-
     }
 }

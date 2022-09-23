@@ -5,12 +5,10 @@ import com.revature.tarotcards.p2scapegoats.models.melissa.Readings;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Users;
 import com.revature.tarotcards.p2scapegoats.repositories.john.JohnReadingRepository;
 import com.revature.tarotcards.p2scapegoats.repositories.john.JohnUserRepository;
-<<<<<<< HEAD
-=======
+
 import com.revature.tarotcards.p2scapegoats.repositories.melissa.ReadingRepository;
 import com.revature.tarotcards.p2scapegoats.services.melissa.ReadingService;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
->>>>>>> chuong-branch
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

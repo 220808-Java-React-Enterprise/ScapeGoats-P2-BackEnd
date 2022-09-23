@@ -59,11 +59,12 @@ public class Categories {
         this.category = category;
     }
 
-    public Set<Readings> getReadings() {
+
+    public List<Readings> getReadings() {
         return readings;
     }
 
-    public void setReadings(Set<Readings> readings) {
+    public void setReadings(List<Readings> readings) {
         this.readings = readings;
     }
 
