@@ -25,10 +25,7 @@ public class AuthController {
     private TokenService tokenService;
     @Autowired
     private JohnUserService userService;
-<<<<<<< HEAD
-=======
 
->>>>>>> chuong-branch
     @CrossOrigin(exposedHeaders = "authorization")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping(value = "/login", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,10 +41,7 @@ public class AuthController {
         response.setHeader("authorization", token);
 
         return principal;
-<<<<<<< HEAD
-=======
 
->>>>>>> chuong-branch
     }
 
     @ExceptionHandler

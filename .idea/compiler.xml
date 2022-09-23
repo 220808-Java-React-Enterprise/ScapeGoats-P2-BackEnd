@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ScapeGoats-P2-BackEnd" />
+        <module name="p2-scape-goats (1)" />
         <module name="p2-scape-goats" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="p2-scape-goats" target="1.8" />
+      <module name="p2-scape-goats (1)" target="1.8" />
       <module name="ScapeGoats-P2-BackEnd" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -19,6 +21,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ScapeGoats-P2-BackEnd" options="-parameters" />
       <module name="p2-scape-goats" options="-parameters" />
+      <module name="p2-scape-goats (1)" options="-parameters" />
     </option>
   </component>
 </project>
