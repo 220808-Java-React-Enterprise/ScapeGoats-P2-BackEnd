@@ -1,6 +1,9 @@
 package com.revature.tarotcards.p2scapegoats.controllers.melissa;
 
+import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewCategoryRequest;
+import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewUserRequest;
 import com.revature.tarotcards.p2scapegoats.dtos.request.melissa.NewUserRequest;
+import com.revature.tarotcards.p2scapegoats.models.melissa.Consultants;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Users;
 import com.revature.tarotcards.p2scapegoats.services.melissa.UserService;
 import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.InvalidRequestException;

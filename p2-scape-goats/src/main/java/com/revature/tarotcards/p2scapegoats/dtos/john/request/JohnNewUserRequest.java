@@ -2,6 +2,7 @@ package com.revature.tarotcards.p2scapegoats.dtos.john.request;
 
 public class JohnNewUserRequest {
 
+    private String user_id;
     private String username;
 
     private String password;
@@ -36,5 +37,14 @@ public class JohnNewUserRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 }
