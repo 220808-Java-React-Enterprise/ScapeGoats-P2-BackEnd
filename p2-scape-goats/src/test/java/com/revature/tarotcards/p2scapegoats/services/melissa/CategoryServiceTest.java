@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -63,7 +64,7 @@ public class CategoryServiceTest {
 
 
         when(mockCategoryRepository.findCategoryByCategory_id(categoryId)).thenReturn(category);
-        when(categoryService.findById(categoryId)).thenReturn(category);
+        when(categoryService.findById(categoryId)).thenReturn(category));
         Categories catagory = categoryService.findById(categoryId);
         String expectedCategoryName = "users";
         String actualCategoryName = catagory.getCategory();
