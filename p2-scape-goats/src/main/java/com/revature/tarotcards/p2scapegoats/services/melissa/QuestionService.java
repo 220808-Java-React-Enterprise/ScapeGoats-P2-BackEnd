@@ -7,24 +7,29 @@ import com.revature.tarotcards.p2scapegoats.models.melissa.Questions;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Readings;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Users;
 import com.revature.tarotcards.p2scapegoats.repositories.melissa.QuestionRepository;
+import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.InvalidRequestException;
 import org.aspectj.weaver.patterns.TypePatternQuestions;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class QuestionService {
 
-    QuestionRepository questRepo;
+    private final QuestionRepository questRepo;
 
     public QuestionService(QuestionRepository questRepo) {
         this.questRepo = questRepo;
     }
 
     public List<Questions> getAll(){
-        return (List<Questions>) questRepo.findAll();
+        List<Questions> questions = (List<Questions>)questRepo.findAll();
+        if(questions.size() == 0) throw new InvalidRequestException("No questions found");
+        return questions;
     }
 
     public String addQuestion(NewQuestionRequest request){

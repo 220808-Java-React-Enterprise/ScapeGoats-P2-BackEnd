@@ -36,7 +36,9 @@ public class UserService {
 
 
     public List<Users> getAll(){
-        return (List<Users>) userRepo.findAll();
+        List<Users> users = (List<Users>)userRepo.findAll();
+        if(users.size() == 0) throw new InvalidRequestException("No users found");
+        return users;
     }
 
     public List<Consultants> getConsultants(String user_id){

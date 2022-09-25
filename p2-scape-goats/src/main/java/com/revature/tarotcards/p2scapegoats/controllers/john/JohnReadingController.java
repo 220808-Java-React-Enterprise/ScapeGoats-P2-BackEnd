@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/readings")
@@ -37,10 +38,10 @@ public class JohnReadingController {
 
     @CrossOrigin(exposedHeaders = "authorization")
     @ResponseStatus(HttpStatus.CREATED)
-    @GetMapping(value = "/byid", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Readings> getAllById(@RequestBody JohnNewReadingRequest request) {
+    @GetMapping(value = "/byid/{userid}", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Readings> getAllById(@PathVariable(value="userid")String userid) {
 
-        return readingService.getAllByUserId(request.getUser_id());
+        return readingService.getAllByUserId(userid);
 
     }
 
