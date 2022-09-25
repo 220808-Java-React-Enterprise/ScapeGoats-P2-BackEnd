@@ -4,25 +4,17 @@ import com.revature.tarotcards.p2scapegoats.dtos.request.melissa.NewUserRequest;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Users;
 import com.revature.tarotcards.p2scapegoats.repositories.melissa.RoleRepository;
 import com.revature.tarotcards.p2scapegoats.repositories.melissa.UserRepository;
-import org.junit.Before;
-<<<<<<< HEAD
+import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.InvalidRequestException;
+import org.assertj.core.util.Arrays;
 import org.junit.Test;
-=======
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+
+
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
->>>>>>> daa1f283e5368694996dbc59b104fd18c3936873
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -31,29 +23,7 @@ public class UserServiceTest {
     private UserRepository mockUserRepo = null;
     private RoleRepository mockRoleRepo;
 
-<<<<<<< HEAD
-    @Before
-    public void setup() {
-        mockUserRepo = mock(UserRepository.class);
-        mockRoleRepo = mock(RoleRepository.class);
-    }
 
-
-    @Test
-    public void finAllUsersTest() {
-        userService = new UserService(mockUserRepo, mockRoleRepo);
-        when(mockUserRepo.findAll()).thenReturn(Arrays.asList(new Users("john", "nguyen")));
-        when(userService.getAll()).thenReturn(Arrays.asList(new Users("john", "nguyen")));
-        List<Users> usersList = userService.getAll();
-        String expectedUserFirstName = "john";
-        String actualFirstName = usersList.get(0).getFirstName();
-
-        assertEquals(expectedUserFirstName, actualFirstName);
-    }
-
-
-}
-=======
     UserService testService;
 
     //creating a mock class of UserService
@@ -164,4 +134,4 @@ public class UserServiceTest {
         verify(userRepositoryMock, times(1)).delete(any());
     }
 }
->>>>>>> daa1f283e5368694996dbc59b104fd18c3936873
+
