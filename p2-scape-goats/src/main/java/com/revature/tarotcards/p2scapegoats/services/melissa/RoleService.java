@@ -3,6 +3,7 @@ package com.revature.tarotcards.p2scapegoats.services.melissa;
 import com.revature.tarotcards.p2scapegoats.dtos.request.melissa.NewRoleRequest;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Roles;
 import com.revature.tarotcards.p2scapegoats.repositories.melissa.RoleRepository;
+import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.InvalidRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,9 @@ public class RoleService {
     }
 
     public List<Roles> getAll(){
-        return (List<Roles>) roleRepo.findAll();
+        List<Roles> roles = (List<Roles>) roleRepo.findAll();
+        if(roles.size() == 0) throw new InvalidRequestException("No users found");
+        return roles;
     }
 
     public Roles findByRole_id(String roleId) {
