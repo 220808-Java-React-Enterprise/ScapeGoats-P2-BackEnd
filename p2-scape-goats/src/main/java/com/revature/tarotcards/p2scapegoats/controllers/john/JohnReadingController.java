@@ -62,8 +62,6 @@ public class JohnReadingController {
         }
     }
 
-
-
     @CrossOrigin(exposedHeaders = "authorization")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -96,8 +94,6 @@ public class JohnReadingController {
         }
 
     }
-
-
 
     @CrossOrigin(exposedHeaders = "authorization")
     @ResponseStatus(value = HttpStatus.ACCEPTED)

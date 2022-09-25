@@ -25,8 +25,6 @@ public class Consultants {
     public Consultants() {
     }
 
-
-
     public Consultants(String id, String firstname, String lastname) {
         this.id = id;
         this.firstname = firstname;

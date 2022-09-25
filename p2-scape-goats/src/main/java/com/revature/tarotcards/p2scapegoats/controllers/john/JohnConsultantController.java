@@ -31,7 +31,6 @@ public class JohnConsultantController {
     @Autowired
     private RoleService roleService;
 
-
     @CrossOrigin(exposedHeaders = "authorization")
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(value = "", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)

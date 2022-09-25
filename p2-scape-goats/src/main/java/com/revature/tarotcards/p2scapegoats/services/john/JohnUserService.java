@@ -51,10 +51,14 @@ public class JohnUserService {
         return user;
     }
 
+    public JohnUserRepository getUserRepo() {
+        return userRepo;
+    }
+
     public JohnPrincipal login(JohnLoginRequest request) {
         Users user = userRepo.findUserByUsernameAndPassword(request.getUsername(), request.getPassword());
         if (user == null) throw new AuthenticationException("\nIncorrect username or password :(");
-        return new JohnPrincipal(user.getUser_id(), user.getUsername(), user.getRole().getRole_id());
+        return new JohnPrincipal(user.getUser_id(), user.getUsername(), user.getRole().getTitle());
     }
 
     public Optional<Users> getUserById(String id) {

@@ -18,6 +18,7 @@ public class Consultation {
     Consultants consultants;
 
     int reviews;
+    
 
     String description;
 

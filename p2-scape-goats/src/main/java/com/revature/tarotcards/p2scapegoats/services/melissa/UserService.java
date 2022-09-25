@@ -8,6 +8,8 @@ import com.revature.tarotcards.p2scapegoats.repositories.melissa.UserRepository;
 
 import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.InvalidRequestException;
 import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.ResourceConflictException;
+import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,13 +20,20 @@ import java.util.UUID;
 @Transactional
 public class UserService {
 
-    private final UserRepository userRepo;
-    private final RoleRepository roleRepo;
+    private UserRepository userRepo = null;
+
+
+    private RoleRepository roleRepo;
+
+    public UserService() {
+
+    }
 
     public UserService(UserRepository userRepo, RoleRepository roleRepo) {
         this.userRepo = userRepo;
         this.roleRepo = roleRepo;
     }
+
 
     public List<Users> getAll(){
         return (List<Users>) userRepo.findAll();

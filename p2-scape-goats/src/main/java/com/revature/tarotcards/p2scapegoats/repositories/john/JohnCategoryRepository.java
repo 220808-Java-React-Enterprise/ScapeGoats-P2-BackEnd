@@ -10,4 +10,7 @@ public interface JohnCategoryRepository extends CrudRepository<Categories, Strin
     @Query(value = "select * from categories where category = ?1", nativeQuery = true)
     Categories findCategoryByCategory(String title);
 
+    @Query(value = "select * from categories where category_id = ?1", nativeQuery = true)
+    Categories findCategoryByCategory_id(String id);
+
 }

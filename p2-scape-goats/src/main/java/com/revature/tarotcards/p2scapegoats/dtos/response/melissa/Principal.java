@@ -12,6 +12,10 @@ public class Principal {
     private String email;
     private Roles role;
 
+    public Principal() {
+
+    }
+
     public Principal(String user_id, String username, String firstname, String lastname, String password, String email, Roles role) {
         this.user_id = user_id;
         this.username = username;

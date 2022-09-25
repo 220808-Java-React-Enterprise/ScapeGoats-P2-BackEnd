@@ -26,6 +26,12 @@ public class AuthController {
     @Autowired
     private JohnUserService userService;
 
+    public AuthController(ObjectMapper mapper, TokenService tokenService, JohnUserService userService) {
+        this.mapper = mapper;
+        this.tokenService = tokenService;
+        this.userService = userService;
+    }
+
     @CrossOrigin(exposedHeaders = "authorization")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping(value = "/login", consumes = "application/json", produces = MediaType.APPLICATION_JSON_VALUE)

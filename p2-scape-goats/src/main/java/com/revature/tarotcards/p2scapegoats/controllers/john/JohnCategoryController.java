@@ -34,8 +34,12 @@ public class JohnCategoryController {
     @Autowired
     private RoleService roleService;
 
+    public JohnCategoryController(JohnCategoryService categoryService, TokenService tokenService, RoleService roleService) {
+        this.categoryService = categoryService;
+        this.tokenService = tokenService;
+        this.roleService = roleService;
+    }
 
- 
     // To POST(CREATE) a catagory use POSTMAN and enter url: http://localhost:8080/p2-scape-goats/categories
     // Use POSTMAN body for application/text below:
     /*

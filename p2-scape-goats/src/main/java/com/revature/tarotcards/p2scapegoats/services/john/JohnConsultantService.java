@@ -19,10 +19,16 @@ public class JohnConsultantService {
     @Autowired
     private JohnUserService userService;
 
+    public JohnConsultantService(JohnConsultantRepository consultantRepository, JohnUserService userService) {
+        this.consultantRepository = consultantRepository;
+        this.userService = userService;
+    }
+
     public Consultants save(JohnNewConsultantRequest request) {
 
         Consultants consultant = new Consultants(UUID.randomUUID().toString(), request.getFirstName(), request.getLastName());
-        return consultantRepository.save(consultant);
+        Consultants returnConsultant = consultantRepository.save(consultant);
+        return returnConsultant;
     }
 
     public Consultants update(JohnNewConsultantRequest request) {
