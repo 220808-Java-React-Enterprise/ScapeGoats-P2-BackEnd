@@ -6,12 +6,7 @@ import com.revature.tarotcards.p2scapegoats.repositories.melissa.ReadingReposito
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static com.oracle.jrockit.jfr.ContentType.Timestamp;
