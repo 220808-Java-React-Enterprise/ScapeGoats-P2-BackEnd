@@ -91,7 +91,6 @@ public class JohnCategoryTest
         when(categoryService.save(request)).thenReturn(category);
 
         Categories returnCategory = categoryService.save(request);
-        System.out.println(returnCategory);
 
         String expectedCategoryName = "users";
         String actualCategoryName = returnCategory.getCategory();
