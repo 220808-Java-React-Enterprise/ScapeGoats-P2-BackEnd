@@ -1,6 +1,7 @@
-package com.revature.tarotcards.p2scapegoats.controllers.john;
+package com.revature.tarotcards.p2scapegoats.services.melissa;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.tarotcards.p2scapegoats.controllers.john.AuthController;
 import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnLoginRequest;
 import com.revature.tarotcards.p2scapegoats.dtos.john.response.JohnPrincipal;
 import com.revature.tarotcards.p2scapegoats.dtos.response.melissa.Principal;

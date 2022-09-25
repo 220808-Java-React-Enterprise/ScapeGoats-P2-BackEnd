@@ -1,4 +1,4 @@
-package com.revature.tarotcards.p2scapegoats.john;
+package com.revature.tarotcards.p2scapegoats.services.melissa;
 
 import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewCategoryRequest;
 import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewConsultantRequest;
@@ -6,8 +6,7 @@ import com.revature.tarotcards.p2scapegoats.models.melissa.Categories;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Consultants;
 import com.revature.tarotcards.p2scapegoats.repositories.john.JohnCategoryRepository;
 import com.revature.tarotcards.p2scapegoats.services.john.JohnCategoryService;
-import org.checkerframework.checker.units.qual.A;
-import org.checkerframework.checker.units.qual.C;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

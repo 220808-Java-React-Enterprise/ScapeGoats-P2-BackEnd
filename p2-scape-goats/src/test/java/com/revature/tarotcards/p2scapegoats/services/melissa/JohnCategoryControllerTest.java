@@ -1,4 +1,4 @@
-package com.revature.tarotcards.p2scapegoats.john;
+package com.revature.tarotcards.p2scapegoats.services.melissa;
 
 import com.revature.tarotcards.p2scapegoats.controllers.john.JohnCategoryController;
 import com.revature.tarotcards.p2scapegoats.controllers.melissa.UsersController;
