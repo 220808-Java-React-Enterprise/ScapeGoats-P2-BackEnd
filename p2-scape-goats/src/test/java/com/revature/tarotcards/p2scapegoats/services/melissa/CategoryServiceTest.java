@@ -64,7 +64,7 @@ public class CategoryServiceTest {
 
 
         when(mockCategoryRepository.findCategoryByCategory_id(categoryId)).thenReturn(category);
-        when(categoryService.findById(categoryId)).thenReturn(category));
+        when(categoryService.findById(categoryId)).thenReturn(category);
         Categories catagory = categoryService.findById(categoryId);
         String expectedCategoryName = "users";
         String actualCategoryName = catagory.getCategory();
