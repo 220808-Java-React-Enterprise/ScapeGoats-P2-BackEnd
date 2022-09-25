@@ -63,8 +63,6 @@ class RoleServiceTest {
 
     @Test
     void addRole() {
-        /*when(mockRequest.getRole_id()).thenReturn("role_id");
-        when(mockRequest.getTitle()).thenReturn("Title");*/
         Roles roles = testService.addRole(mockRequest);
         assertNotNull(roles);
         assertEquals(roles.getRole_id(), "role_id");

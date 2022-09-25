@@ -5,6 +5,7 @@ import com.revature.tarotcards.p2scapegoats.models.melissa.Categories;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Readings;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Users;
 import com.revature.tarotcards.p2scapegoats.repositories.melissa.ReadingRepository;
+import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.InvalidRequestException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +17,14 @@ public class ReadingService {
     ReadingRepository readingRep;
 
     public ReadingService(ReadingRepository readingRep) {
+
         this.readingRep = readingRep;
     }
 
     public List<Readings> getAll(){
-        return (List<Readings>) readingRep.findAll();
+        List<Readings> readings = (List<Readings>) readingRep.findAll();
+        if(readings.size() == 0) throw new InvalidRequestException("No readings found");
+        return readings;
     }
 
     public List<Readings> getAllByUserId(String userId){
