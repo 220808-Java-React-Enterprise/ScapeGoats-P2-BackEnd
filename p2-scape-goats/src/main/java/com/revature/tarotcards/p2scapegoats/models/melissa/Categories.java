@@ -25,7 +25,7 @@ public class Categories {
     )
     
     @JsonManagedReference
-    private List<Readings> readings;
+    private Set<Readings> readings;
 
     @OneToMany(
             mappedBy = "categories",
@@ -60,11 +60,11 @@ public class Categories {
     }
 
 
-    public List<Readings> getReadings() {
+    public Set<Readings> getReadings() {
         return readings;
     }
 
-    public void setReadings(List<Readings> readings) {
+    public void setReadings(Set<Readings> readings) {
         this.readings = readings;
     }
 
