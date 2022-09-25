@@ -6,11 +6,7 @@ import com.revature.tarotcards.p2scapegoats.models.melissa.Users;
 import com.revature.tarotcards.p2scapegoats.repositories.john.JohnConsultantRepository;
 import com.revature.tarotcards.p2scapegoats.services.john.JohnConsultantService;
 import com.revature.tarotcards.p2scapegoats.services.john.JohnUserService;
-<<<<<<< HEAD:p2-scape-goats/src/test/java/com/revature/tarotcards/p2scapegoats/services/melissa/ConsultantServiceTest.java
-=======
-import org.checkerframework.checker.units.qual.C;
-import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
->>>>>>> chuong-nguyen:p2-scape-goats/src/test/java/com/revature/tarotcards/p2scapegoats/services/melissa/JohnConsultantServiceTest.java
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
