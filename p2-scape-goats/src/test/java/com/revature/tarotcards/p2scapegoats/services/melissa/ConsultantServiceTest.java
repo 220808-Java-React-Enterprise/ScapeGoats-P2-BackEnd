@@ -15,11 +15,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 public class ConsultantServiceTest {
-
     @Autowired
     private JohnConsultantRepository mockConsultantRepository;
 
@@ -109,4 +108,5 @@ public class ConsultantServiceTest {
         verify(consultantService, times(1)).deleteConsultant(request);
 
     }
+
 }

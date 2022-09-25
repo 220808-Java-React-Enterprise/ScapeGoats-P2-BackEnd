@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
  * @ComponentScan: enables Spring to scan for things like configuration, controllers, services, and other components we define.
  * @Configuration: allow to register extra beans in the context or import additional configuration classes
  */
+
 @SpringBootApplication
 public class P2ScapeGoatsApplication {
 

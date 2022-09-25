@@ -4,7 +4,6 @@ import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewCategoryReq
 import com.revature.tarotcards.p2scapegoats.models.melissa.Categories;
 import com.revature.tarotcards.p2scapegoats.repositories.john.JohnCategoryRepository;
 import com.revature.tarotcards.p2scapegoats.services.john.JohnCategoryService;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
-public class CategoryServiceTest
-{
+public class CategoryServiceTest {
     @Autowired
     private JohnCategoryService categoryService;
 
@@ -124,7 +122,7 @@ public class CategoryServiceTest
     }
 
     @Test
-    public void updateCategoryTest() {
+    public void updateCategory_Check_Category_ID_Test() {
 
         JohnNewCategoryRequest request = new JohnNewCategoryRequest();
         request.setId("123");
@@ -135,12 +133,37 @@ public class CategoryServiceTest
         when(mockCategoryRepository.save(new Categories("123", "users"))).thenReturn(tempCategory);
         when(categoryService.update(request)).thenReturn(tempCategory);
 
+        mockCategoryRepository.save(tempCategory);
+
         Categories returnCategory = categoryService.update(request);
 
         String expectedCategoryId = "123";
-        //String actualCategoryId = returnCategory.getCategory_id();
+        String actualCategoryId = returnCategory.getCategory_id();
 
-        //assertEquals(expectedCategoryId, actualCategoryId);
+        assertEquals(expectedCategoryId, actualCategoryId);
+
+    }
+
+    @Test
+    public void updateCategory_Check_Category_Name_Test() {
+
+        JohnNewCategoryRequest request = new JohnNewCategoryRequest();
+        request.setId("123");
+        request.setCategory("users");
+
+        Categories tempCategory = new Categories("123", "users");
+
+        when(mockCategoryRepository.save(new Categories("123", "users"))).thenReturn(tempCategory);
+        when(categoryService.update(request)).thenReturn(tempCategory);
+
+        mockCategoryRepository.save(tempCategory);
+
+        Categories returnCategory = categoryService.update(request);
+
+        String expectedCategoryName = "users";
+        String actualCategoryName = returnCategory.getCategory();
+
+        assertEquals(expectedCategoryName, actualCategoryName);
 
     }
 
@@ -158,5 +181,4 @@ public class CategoryServiceTest
 
 
     }
-
 }
