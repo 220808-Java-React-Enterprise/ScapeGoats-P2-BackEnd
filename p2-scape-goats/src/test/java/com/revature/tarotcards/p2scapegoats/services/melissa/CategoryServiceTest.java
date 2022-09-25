@@ -18,7 +18,7 @@ import static org.mockito.Mockito.times;
 
 public class CategoryServiceTest {
     @Autowired
-    private JohnCategoryService categoryService;
+    private CategoryService categoryService;
 
     @Autowired
     private JohnCategoryRepository mockCategoryRepository;
@@ -26,7 +26,7 @@ public class CategoryServiceTest {
     @Before
     public void setup() {
         mockCategoryRepository = mock(JohnCategoryRepository.class, RETURNS_DEEP_STUBS);
-        categoryService = mock(JohnCategoryService.class, RETURNS_DEEP_STUBS);
+        categoryService = mock(CategoryService.class, RETURNS_DEEP_STUBS);
     }
 
     @Test

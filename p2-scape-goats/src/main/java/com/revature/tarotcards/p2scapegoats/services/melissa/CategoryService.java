@@ -18,6 +18,10 @@ public class CategoryService {
         this.categoryRepo = categoryRepo;
     }
 
+    public List<Categories> getAllCategories(){
+        return (List<Categories>) categoryRepo.findAll();
+    }
+
     public List<Categories> getAll(){
         return (List<Categories>) categoryRepo.findAll();
     }
@@ -27,6 +31,24 @@ public class CategoryService {
 
         return categoryRepo.save(cat);
     }
+
+    public Categories findById(String id) {
+        Categories category = categoryRepo.findCategoryByCategory_id(id);
+        return category;
+    }
+    public Categories save(JohnNewCategoryRequest request) {
+        Categories category = new Categories(UUID.randomUUID().toString(), request.getCategory());
+        return categoryRepo.save(category);
+    }
+
+    public Categories findCategoryByCategory(String categoryName) {
+        return categoryRepo.findCategoryByCategory(categoryName);
+    }
+    public Categories update(JohnNewCategoryRequest request) {
+        Categories category = new Categories(request.getId(), request.getCategory());
+        Categories returnCategory = categoryRepo.save(category);
+        return returnCategory;
+    }
     /*public Categories save(JohnNewCategoryRequest request) { JOHN
         Categories category = new Categories(UUID.randomUUID().toString(), request.getCategory());
 
@@ -34,6 +56,11 @@ public class CategoryService {
     }*/
 
     public void delete(Categories category){
+        categoryRepo.delete(category);
+    }
+
+    public void deleteCategory(JohnNewCategoryRequest request) {
+        Categories category = categoryRepo.findCategoryByCategory(request.getCategory());
         categoryRepo.delete(category);
     }
 }
