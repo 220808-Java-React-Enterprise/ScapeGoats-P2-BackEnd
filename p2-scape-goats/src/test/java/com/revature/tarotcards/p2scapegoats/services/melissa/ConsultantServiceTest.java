@@ -1,14 +1,11 @@
 package com.revature.tarotcards.p2scapegoats.services.melissa;
 
-import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewCategoryRequest;
 import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewConsultantRequest;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Consultants;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Users;
 import com.revature.tarotcards.p2scapegoats.repositories.john.JohnConsultantRepository;
 import com.revature.tarotcards.p2scapegoats.services.john.JohnConsultantService;
 import com.revature.tarotcards.p2scapegoats.services.john.JohnUserService;
-import org.checkerframework.checker.units.qual.C;
-import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -19,10 +16,9 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.*;
 
-public class JohnConsultantServiceTest {
+public class ConsultantServiceTest {
 
     @Autowired
     private JohnConsultantRepository mockConsultantRepository;
