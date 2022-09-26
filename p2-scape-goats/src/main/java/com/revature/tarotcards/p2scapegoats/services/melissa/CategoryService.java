@@ -19,10 +19,6 @@ public class CategoryService {
         this.categoryRepo = categoryRepo;
     }
 
-    public List<Categories> getAllCategories(){
-        return (List<Categories>) categoryRepo.findAll();
-    }
-
     public List<Categories> getAll(){
         List<Categories> category = (List<Categories>) categoryRepo.findAll();
         if (category.size()==0) throw new InvalidRequestException("No categories found");

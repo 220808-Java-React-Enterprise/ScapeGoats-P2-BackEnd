@@ -6,8 +6,8 @@ public class NewCategoryRequest {
     private String category_id;
     private String category;
 
-    public NewCategoryRequest() {
-    }
+    /*public NewCategoryRequest() {
+    }*/
 
     public NewCategoryRequest(String category_id, String category) {
         this.category_id = category_id;

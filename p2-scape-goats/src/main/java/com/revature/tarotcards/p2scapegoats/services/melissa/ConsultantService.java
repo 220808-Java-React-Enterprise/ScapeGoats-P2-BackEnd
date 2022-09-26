@@ -14,7 +14,7 @@ import java.util.UUID;
 @Service
 public class ConsultantService {
 
-    ConsultantRepository consRepo;
+    private final ConsultantRepository consRepo;
 
     public ConsultantService(ConsultantRepository consRepo) {
         this.consRepo = consRepo;

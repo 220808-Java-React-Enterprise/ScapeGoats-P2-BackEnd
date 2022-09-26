@@ -43,7 +43,7 @@ class CategoryServiceTest {
     }
 
     @Test
-    void getAllCategories() {
+    void getAll() {
         when(categoryRepositoryMock.findAll()).thenReturn(Arrays.asList(mockCategory));
         List<Categories> categories = testService.getAll();
         verify(categoryRepositoryMock, times(1)).findAll();
@@ -52,15 +52,17 @@ class CategoryServiceTest {
     }
 
     @Test
-    void getAll() {
-    }
-
-    @Test
     void addCategory() {
+        Categories category = testService.addCategory(mockCategoryRequest);
+        assertNull(category);
     }
 
     @Test
     void findById() {
+        when(categoryRepositoryMock.findCategoryByCategory_id("Category_id")).thenReturn(mockCategory);
+        mockCategory = testService.findById("Category_id");
+        verify(categoryRepositoryMock, times(1)).findCategoryByCategory_id(mockCategory.getCategory_id());
+        //assertNull(mockCategory);
     }
 
     @Test
@@ -69,5 +71,7 @@ class CategoryServiceTest {
 
     @Test
     void delete() {
+        categoryRepositoryMock.delete(mockCategory);
+        verify(categoryRepositoryMock, times(1)).delete(any());
     }
 }
