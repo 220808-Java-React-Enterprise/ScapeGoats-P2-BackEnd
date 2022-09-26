@@ -1,185 +1,73 @@
 package com.revature.tarotcards.p2scapegoats.services.melissa;
 
-import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewCategoryRequest;
+import com.revature.tarotcards.p2scapegoats.dtos.request.melissa.NewCategoryRequest;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Categories;
-import com.revature.tarotcards.p2scapegoats.repositories.john.JohnCategoryRepository;
-import com.revature.tarotcards.p2scapegoats.services.john.JohnCategoryService;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.revature.tarotcards.p2scapegoats.repositories.melissa.CategoryRepository;
+import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
-public class CategoryServiceTest {
-    @Autowired
-    private CategoryService categoryService;
+class CategoryServiceTest {
 
-    @Autowired
-    private JohnCategoryRepository mockCategoryRepository;
+    CategoryService testService;
 
-    @Before
-    public void setup() {
-        mockCategoryRepository = mock(JohnCategoryRepository.class, RETURNS_DEEP_STUBS);
-        categoryService = mock(CategoryService.class, RETURNS_DEEP_STUBS);
+    private CategoryRepository categoryRepositoryMock;
+    private Categories mockCategory;
+    private NewCategoryRequest mockCategoryRequest;
+
+
+
+    @BeforeEach
+    void setUp() {
+        categoryRepositoryMock = mock(CategoryRepository.class);
+        testService = new CategoryService(categoryRepositoryMock);
+        mockCategory = mock(Categories.class);
+        mockCategoryRequest = mock(NewCategoryRequest.class);
+        when(mockCategoryRequest.getCategory()).thenReturn("Category");
+        when(mockCategoryRequest.getCategory_id()).thenReturn("Category_id");
+    }
+
+    @AfterEach
+    public void setdown(){
+        categoryRepositoryMock = null;
+        testService = null;
+        mockCategory = null;
+        mockCategoryRequest = null;
     }
 
     @Test
-    public void getAllCategories_Size_Test() {
-
-        when(mockCategoryRepository.findAll()).thenReturn(Arrays.asList(new Categories("123", "users")));
-        when(categoryService.getAllCategories()).thenReturn(Arrays.asList(new Categories("123", "users")));
-
-        List<Categories> catList = categoryService.getAllCategories();
-        int expectedListSize = 1;
-        int actualListSize = catList.size();
-
-        assertEquals(expectedListSize, actualListSize);
-
-    }
-
-    @Test
-    public void getAllCategoriesTest() {
-
-        when(mockCategoryRepository.findAll()).thenReturn(Arrays.asList(new Categories("123", "users")));
-        when(categoryService.getAllCategories()).thenReturn(Arrays.asList(new Categories("123", "users")));
-
-        List<Categories> catList = categoryService.getAllCategories();
-        String expectedCategoryName = "users";
-        String actualCategoryName = catList.get(0).getCategory();
-
-        assertEquals(expectedCategoryName, actualCategoryName);
+    void getAllCategories() {
+        when(categoryRepositoryMock.findAll()).thenReturn(Arrays.asList(mockCategory));
+        List<Categories> categories = testService.getAll();
+        verify(categoryRepositoryMock, times(1)).findAll();
+        assertNotNull(categories);
 
     }
 
     @Test
-    public void findByCategoryByIdTest() {
-        String categoryId = "123";
-        Categories category = new Categories("123", "users");
-
-
-        when(mockCategoryRepository.findCategoryByCategory_id(categoryId)).thenReturn(category);
-        when(categoryService.findById(categoryId)).thenReturn(category);
-        Categories catagory = categoryService.findById(categoryId);
-        String expectedCategoryName = "users";
-        String actualCategoryName = catagory.getCategory();
-
-        assertEquals(expectedCategoryName, actualCategoryName);
+    void getAll() {
     }
 
     @Test
-    public void saveCategoryTest() {
-        Categories category = new Categories("123", "users");
-        JohnNewCategoryRequest request = new JohnNewCategoryRequest();
-        request.setId("123");
-        request.setCategory("users");
-
-        when(mockCategoryRepository.save(category)).thenReturn(category);
-        when(categoryService.save(request)).thenReturn(category);
-
-        Categories returnCategory = categoryService.save(request);
-
-        String expectedCategoryName = "users";
-        String actualCategoryName = returnCategory.getCategory();
-        assertEquals(expectedCategoryName, actualCategoryName);
-
+    void addCategory() {
     }
 
     @Test
-    public void findCategoryByCategoryNameTest() {
-
-        String categoryName = "users";
-        when(mockCategoryRepository.findCategoryByCategory(categoryName)).thenReturn(new Categories("123", "users"));
-        when(categoryService.findCategoryByCategory(categoryName)).thenReturn(new Categories("123", "users"));
-        Categories returnCategory = categoryService.findCategoryByCategory(categoryName);
-
-        String expectedCategoryName = "users";
-        String actualCategoryName = returnCategory.getCategory();
-
-        assertEquals(expectedCategoryName, actualCategoryName);
-
+    void findById() {
     }
 
     @Test
-    public void findCategoryByCategoryName() {
-
-        String categoryName = "users";
-
-        when(mockCategoryRepository.findCategoryByCategory(categoryName)).thenReturn(new Categories("123", "users"));
-        when(categoryService.findCategoryByCategory(categoryName)).thenReturn(new Categories("123", "users"));
-
-        Categories returnCategory = categoryService.findCategoryByCategory(categoryName);
-
-        String expectedCategoryId = "123";
-        String actualCategoryId = returnCategory.getCategory_id();
-
-        assertEquals(expectedCategoryId, actualCategoryId);
-
+    void findCategoryByCategory() {
     }
 
     @Test
-    public void updateCategory_Check_Category_ID_Test() {
-
-        JohnNewCategoryRequest request = new JohnNewCategoryRequest();
-        request.setId("123");
-        request.setCategory("users");
-
-        Categories tempCategory = new Categories("123", "users");
-
-        when(mockCategoryRepository.save(new Categories("123", "users"))).thenReturn(tempCategory);
-        when(categoryService.update(request)).thenReturn(tempCategory);
-
-        mockCategoryRepository.save(tempCategory);
-
-        Categories returnCategory = categoryService.update(request);
-
-        String expectedCategoryId = "123";
-        String actualCategoryId = returnCategory.getCategory_id();
-
-        assertEquals(expectedCategoryId, actualCategoryId);
-
-    }
-
-    @Test
-    public void updateCategory_Check_Category_Name_Test() {
-
-        JohnNewCategoryRequest request = new JohnNewCategoryRequest();
-        request.setId("123");
-        request.setCategory("users");
-
-        Categories tempCategory = new Categories("123", "users");
-
-        when(mockCategoryRepository.save(new Categories("123", "users"))).thenReturn(tempCategory);
-        when(categoryService.update(request)).thenReturn(tempCategory);
-
-        mockCategoryRepository.save(tempCategory);
-
-        Categories returnCategory = categoryService.update(request);
-
-        String expectedCategoryName = "users";
-        String actualCategoryName = returnCategory.getCategory();
-
-        assertEquals(expectedCategoryName, actualCategoryName);
-
-    }
-
-    @Test
-    public void deleteCategoryTest() {
-        JohnNewCategoryRequest request = new JohnNewCategoryRequest();
-        request.setId("123");
-        request.setCategory("users");
-
-
-        doNothing().when(mockCategoryRepository).delete(new Categories());
-        doNothing().when(categoryService).deleteCategory(new JohnNewCategoryRequest());
-        categoryService.deleteCategory(request);
-        verify(categoryService, times(1)).deleteCategory(request);
-
-
+    void delete() {
     }
 }

@@ -4,6 +4,7 @@ import com.revature.tarotcards.p2scapegoats.dtos.john.request.JohnNewCategoryReq
 import com.revature.tarotcards.p2scapegoats.dtos.request.melissa.NewCategoryRequest;
 import com.revature.tarotcards.p2scapegoats.models.melissa.Categories;
 import com.revature.tarotcards.p2scapegoats.repositories.melissa.CategoryRepository;
+import com.revature.tarotcards.p2scapegoats.utils.melissa.custom_exceptions.InvalidRequestException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,9 @@ public class CategoryService {
     }
 
     public List<Categories> getAll(){
-        return (List<Categories>) categoryRepo.findAll();
+        List<Categories> category = (List<Categories>) categoryRepo.findAll();
+        if (category.size()==0) throw new InvalidRequestException("No categories found");
+        return category;
     }
 
     public Categories addCategory(NewCategoryRequest request){
@@ -36,19 +39,11 @@ public class CategoryService {
         Categories category = categoryRepo.findCategoryByCategory_id(id);
         return category;
     }
-    public Categories save(JohnNewCategoryRequest request) {
-        Categories category = new Categories(UUID.randomUUID().toString(), request.getCategory());
-        return categoryRepo.save(category);
-    }
 
     public Categories findCategoryByCategory(String categoryName) {
         return categoryRepo.findCategoryByCategory(categoryName);
     }
-    public Categories update(JohnNewCategoryRequest request) {
-        Categories category = new Categories(request.getId(), request.getCategory());
-        Categories returnCategory = categoryRepo.save(category);
-        return returnCategory;
-    }
+
     /*public Categories save(JohnNewCategoryRequest request) { JOHN
         Categories category = new Categories(UUID.randomUUID().toString(), request.getCategory());
 
@@ -59,8 +54,4 @@ public class CategoryService {
         categoryRepo.delete(category);
     }
 
-    public void deleteCategory(JohnNewCategoryRequest request) {
-        Categories category = categoryRepo.findCategoryByCategory(request.getCategory());
-        categoryRepo.delete(category);
-    }
 }

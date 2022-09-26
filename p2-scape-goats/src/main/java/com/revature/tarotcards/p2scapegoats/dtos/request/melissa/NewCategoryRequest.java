@@ -30,6 +30,8 @@ public class NewCategoryRequest {
         return category_id;
     }
 
+
+
     @Override
     public String toString() {
         return "NewCategoryRequest{" +
